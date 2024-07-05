@@ -48,24 +48,25 @@ ShipBattle >> initializeWithShips: aCollectionOfShips withDice: aCollectionOfDic
 { #category : #event }
 ShipBattle >> resolveBattleBetween: aShip and: anotherShip with: aCardHandler [
 
-	| aShipDiceRoll anotherShipDiceRoll loserShipArmy aShipArmy anotherShipArmy |
+	| anArmyOfShipsDiceRoll anotherArmyOfShipsDiceRoll loserShipArmy aShipArmy anotherShipArmy |
 	aShipArmy := self shipsNames: (aCardHandler mercenariesOf: aShip).
 	anotherShipArmy := self shipsNames:
 		                   (aCardHandler mercenariesOf: anotherShip).
 
-	aShipDiceRoll := 0.
-	anotherShipDiceRoll := 0.
+	anArmyOfShipsDiceRoll := 0.
+	anotherArmyOfShipsDiceRoll := 0.
+	
 	aShipArmy do: [ :aShipInArmy |
 		| cardMovement |
 		cardMovement := aCardHandler movementCardsActivated: aShipInArmy.
-		aShipDiceRoll + dice throw + cardMovement ].
+		anArmyOfShipsDiceRoll := anArmyOfShipsDiceRoll + dice throw + cardMovement ].
 
 	anotherShipArmy do: [ :aShipInArmy |
 		| cardMovement |
 		cardMovement := aCardHandler movementCardsActivated: aShipInArmy.
-		aShipDiceRoll + dice throw + cardMovement ].
+		anotherArmyOfShipsDiceRoll := anotherArmyOfShipsDiceRoll + dice throw + cardMovement ].
 	
-	loserShipArmy := aShipDiceRoll > anotherShipDiceRoll
+	loserShipArmy := anArmyOfShipsDiceRoll > anotherArmyOfShipsDiceRoll
 		                 ifTrue: [ anotherShipArmy ]
 		                 ifFalse: [ aShipArmy ].
 	loserShipArmy do: [ :aShipInArmy |
