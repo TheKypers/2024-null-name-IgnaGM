@@ -41,6 +41,95 @@ CardsEffectTest >> testWhenApplingRepeatCardLastEffectIsAppliedToTheTargetedShip
 ]
 
 { #category : #tests }
+CardsEffectTest >> testWhenApplyingRedoCardLastCardIsPlayedAgain [
+
+	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget anotherTarget |
+	aTileArray := OrderedCollection new.
+	15 timesRepeat: [ aTileArray add: NullEffect new ].
+
+	aTileArray at: 6 put: CardGeneratorEffect new.
+
+	aBoard := Board
+		          withTileEffectCollection: aTileArray
+		          withLengthInUnits: (Parsec withNominalValue: 10)
+		          withAmountOfLaps: 1.
+
+	aCollectionOfNames := OrderedCollection with: 'Juan' with: 'Jose'.
+	aCollectionOfDie := OrderedCollection with:
+		                    (SequenceDie withSequence: #( 5 1 )).
+
+	collectionOfCards := OrderedCollection new.
+	4 timesRepeat: [ collectionOfCards add: RedoCard ].
+	collectionOfCards add: SpeedCard.
+	aDeck := LoadedDeck withCards: collectionOfCards.
+
+	aGame := Game
+		         withBoard: aBoard
+		         withShipNames: aCollectionOfNames
+		         withDice: (Dice with: aCollectionOfDie)
+		         withDeck: aDeck.
+
+	aTarget := ShipTarget withObjective: 'Juan'.
+	anotherTarget := ShipTarget withObjective: 'Jose'.
+
+	aGame playTurn.
+	aGame playTurn.
+	aGame playCard: SpeedCard by: 'Juan' toTarget: aTarget.
+	aGame playTurn.
+	aGame playCard: RedoCard by: 'Jose' toTarget: anotherTarget.
+	aGame playTurn.
+
+	self
+		assert: (aGame allShipsPosition at: 'Jose')
+		equals: #( 4 1 ) asOrderedCollection
+]
+
+{ #category : #tests }
+CardsEffectTest >> testWhenApplyingRedoCardMultipleTimesApplyLastNonRedoCard [
+
+	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget anotherTarget |
+	aTileArray := OrderedCollection new.
+	15 timesRepeat: [ aTileArray add: NullEffect new ].
+
+	aTileArray at: 6 put: CardGeneratorEffect new.
+
+	aBoard := Board
+		          withTileEffectCollection: aTileArray
+		          withLengthInUnits: (Parsec withNominalValue: 10)
+		          withAmountOfLaps: 1.
+
+	aCollectionOfNames := OrderedCollection with: 'Juan' with: 'Jose'.
+	aCollectionOfDie := OrderedCollection with:
+		                    (SequenceDie withSequence: #( 5 1 )).
+
+	collectionOfCards := OrderedCollection new.
+	4 timesRepeat: [ collectionOfCards add: RedoCard ].
+	collectionOfCards add: SpeedCard.
+	aDeck := LoadedDeck withCards: collectionOfCards.
+	aGame := Game
+		         withBoard: aBoard
+		         withShipNames: aCollectionOfNames
+		         withDice: (Dice with: aCollectionOfDie)
+		         withDeck: aDeck.
+	
+	aTarget := ShipTarget withObjective: 'Juan'.
+	anotherTarget := ShipTarget withObjective: 'Jose'.
+	
+	
+	aGame playTurn.
+	aGame playTurn.
+	aGame playCard: SpeedCard by: 'Juan' toTarget: aTarget.
+	aGame playCard: RedoCard by: 'Juan' toTarget: aTarget.
+	aGame playTurn.
+	aGame playCard: RedoCard by: 'Jose' toTarget: anotherTarget.
+	aGame playTurn.
+
+	self
+		assert: (aGame allShipsPosition at: 'Jose')
+		equals: #( 4 1 ) asOrderedCollection
+]
+
+{ #category : #tests }
 CardsEffectTest >> testWhenOneAccelerationCardIsPlayedShipsMoveOneExtraTile [
 
 	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget |
