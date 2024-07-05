@@ -193,11 +193,11 @@ CardsTest >> testWhenApplyingRepeatCardShipDoesNotMoveOutOfBounds [
 		         withShipNames: aCollectionOfNames
 		         withDice: (Dice with: aCollectionOfDie)
 		         withDeck: aDeck.
-	
+
 	aTarget := ShipTarget withObjective: 'Juan'.
-	
+
 	aGame playTurn.
-	aGame playCard: RepeatCard by: 'Jose' toTarget: aTarget .
+	aGame playCard: RepeatCard by: 'Jose' toTarget: aTarget.
 
 	self
 		assert: (aGame allShipsPosition at: 'Juan')
