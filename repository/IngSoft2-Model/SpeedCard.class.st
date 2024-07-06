@@ -8,20 +8,27 @@ Class {
 SpeedCard >> activate: aCardHandler withTarget: aTarget [
 
 	target := aTarget.
+	movement := 1.
 	aCardHandler addToActiveCards: self.
-	aCardHandler changeLastCardTo: self.
+	aCardHandler changeLastCardTo: self
 ]
 
 { #category : #comparing }
 SpeedCard >> applyMovement [
 
-	^ 1
+	^ movement 
 ]
 
 { #category : #comparing }
 SpeedCard >> canPlayRightNow: theShipInTurn [
 
 	^ theShipInTurn shipName = holder
+]
+
+{ #category : #'as yet unclassified' }
+SpeedCard >> reverseCardEffect [
+
+	movement := movement negated
 ]
 
 { #category : #comparing }

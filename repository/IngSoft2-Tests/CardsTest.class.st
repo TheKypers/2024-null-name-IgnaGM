@@ -287,3 +287,95 @@ CardsTest >> testWhenMercenaryCardIsPlayedAlliedShipsDontBattle [
 	self assert: (aGame allShipAmountOfShields at: 'Juan') equals: 3.
 	self assert: (aGame allShipAmountOfShields at: 'Jose') equals: 3
 ]
+
+{ #category : #tests }
+CardsTest >> testWhenReversalCardIsPlayedTargetingAnAccelerationCardShipMovesOneLessTile [
+
+	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget anotherTarget |
+	aTileArray := OrderedCollection new.
+	10 timesRepeat: [ aTileArray add: NullEffect new ].
+
+
+	aTileArray at: 6 put: CardGeneratorEffect new.
+
+	aBoard := Board
+		          withTileEffectCollection: aTileArray
+		          withLengthInUnits: (Parsec withNominalValue: 10)
+		          withAmountOfLaps: 1.
+	aCollectionOfNames := OrderedCollection with: 'Juan' with: 'Jose'.
+	aCollectionOfDie := OrderedCollection with:
+		                    (SequenceDie withSequence: #( 5 )).
+
+	collectionOfCards := OrderedCollection new.
+	4 timesRepeat: [ collectionOfCards add: AccelerationCard  ].
+	collectionOfCards add: ReversalCard.
+	aDeck := LoadedDeck withCards: collectionOfCards.
+
+	aGame := Game
+		         withBoard: aBoard
+		         withShipNames: aCollectionOfNames
+		         withDice: (Dice with: aCollectionOfDie)
+		         withDeck: aDeck.
+
+
+	aTarget := AllShipsTarget new.
+	anotherTarget := CardTarget withObjective: (AccelerationCard
+			                  withHolder: 'Jose'
+			                  andTarget: aTarget).
+			
+	aGame playTurn.
+	aGame playCard: AccelerationCard by: 'Jose' toTarget: aTarget.
+	aGame playCard: ReversalCard by: 'Juan' toTarget: anotherTarget.
+	aGame playTurn.
+
+
+	self assert: (aGame allShipsPosition  at: 'Juan') equals: #(6 1) asOrderedCollection .
+	self assert: (aGame allShipsPosition at: 'Jose') equals: #(5 1) asOrderedCollection.
+	
+]
+
+{ #category : #tests }
+CardsTest >> testWhenReversalCardIsPlayedTargetingAnSpeedCardShipMovesOneLessTile [
+
+	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget anotherTarget |
+	aTileArray := OrderedCollection new.
+	10 timesRepeat: [ aTileArray add: NullEffect new ].
+
+
+	aTileArray at: 6 put: CardGeneratorEffect new.
+
+	aBoard := Board
+		          withTileEffectCollection: aTileArray
+		          withLengthInUnits: (Parsec withNominalValue: 10)
+		          withAmountOfLaps: 1.
+	aCollectionOfNames := OrderedCollection with: 'Juan' with: 'Jose'.
+	aCollectionOfDie := OrderedCollection with:
+		                    (SequenceDie withSequence: #( 5 )).
+
+	collectionOfCards := OrderedCollection new.
+	4 timesRepeat: [ collectionOfCards add: SpeedCard  ].
+	collectionOfCards add: ReversalCard.
+	aDeck := LoadedDeck withCards: collectionOfCards.
+
+	aGame := Game
+		         withBoard: aBoard
+		         withShipNames: aCollectionOfNames
+		         withDice: (Dice with: aCollectionOfDie)
+		         withDeck: aDeck.
+
+
+	aTarget := ShipTarget withObjective: 'Jose'.
+	anotherTarget := CardTarget withObjective: (SpeedCard
+			                  withHolder: 'Jose'
+			                  andTarget: aTarget).
+			
+	aGame playTurn.
+	aGame playCard: SpeedCard  by: 'Jose' toTarget: aTarget.
+	aGame playCard: ReversalCard by: 'Juan' toTarget: anotherTarget.
+	aGame playTurn.
+
+
+	self assert: (aGame allShipsPosition  at: 'Juan') equals: #(6 1) asOrderedCollection .
+	self assert: (aGame allShipsPosition at: 'Jose') equals: #(5 1) asOrderedCollection.
+	
+]

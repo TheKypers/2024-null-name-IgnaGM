@@ -5,22 +5,28 @@ Class {
 }
 
 { #category : #event }
-AccelerationCard >> activate: aCardHandler withTarget: aShipName [
-	
-	
-	target := aShipName.
+AccelerationCard >> activate: aCardHandler withTarget: aTarget [
+
+	target := aTarget.
+	movement  := 1.
 	aCardHandler addToActiveCards: self.
-	aCardHandler changeLastCardTo: self.
+	aCardHandler changeLastCardTo: self
 ]
 
 { #category : #comparing }
 AccelerationCard >> applyMovement [
 
-	^ 1
+	^ movement
 ]
 
 { #category : #comparing }
 AccelerationCard >> canPlayRightNow: theShipInTurn [
 
 	^ theShipInTurn shipName = holder
+]
+
+{ #category : #'as yet unclassified' }
+AccelerationCard >> reverseCardEffect [
+
+	movement := movement negated
 ]

@@ -6,7 +6,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'holder',
-		'target'
+		'target',
+		'movement'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -38,7 +39,7 @@ Card >> activate: aCardHandler withTarget: aShipName [
 { #category : #comparing }
 Card >> applyMovement [
 
-	^ 0
+	^ movement
 ]
 
 { #category : #comparing }
@@ -70,6 +71,7 @@ Card >> initalizeWithHolder: aShipName withTarget: aTarget [
 
 	holder := aShipName.
 	target := aTarget.
+	movement := 0
 ]
 
 { #category : #comparing }

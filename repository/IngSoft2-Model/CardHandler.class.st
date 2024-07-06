@@ -113,7 +113,7 @@ CardHandler >> movementCardsActivated: theShipInTurn [
 
 	^ ((activeCards select: [ :card |
 		    card shouldApplyOn: theShipInTurn shipName ]) sumNumbers: [
-		   :card | card applyMovement ]) max: 0
+		   :card | card applyMovement ])
 ]
 
 { #category : #comparing }
@@ -137,6 +137,12 @@ CardHandler >> removeCoalitionOf: aLeader and: aMercenary [
 CardHandler >> removeFromActiveCard: aTarget [
 
 	activeCards remove: aTarget
+]
+
+{ #category : #comparing }
+CardHandler >> reverseCard: aCard [
+
+	(activeCards detect: [ :card | card = aCard objective]) reverseCardEffect.
 ]
 
 { #category : #generating }
