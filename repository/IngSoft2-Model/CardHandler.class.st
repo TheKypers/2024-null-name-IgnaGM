@@ -35,12 +35,6 @@ CardHandler >> addCoalition: aCoalition [
 	coalitionHandler addToCoalitions: aCoalition
 ]
 
-{ #category : #accessing }
-CardHandler >> addReverseCoalition: aCoalition [
-
-	coalitionHandler modifyReverseCoalitions: aCoalition
-]
-
 { #category : #comparing }
 CardHandler >> addToActiveCards: aCard [
 
