@@ -335,6 +335,54 @@ CardsTest >> testWhenReversalCardIsPlayedTargetingAnAccelerationCardShipMovesOne
 ]
 
 { #category : #tests }
+CardsTest >> testWhenReversalCardIsPlayedTargetingAnMercenaryCardBanana [
+
+	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget anotherTarget |
+	aTileArray := OrderedCollection new.
+	10 timesRepeat: [ aTileArray add: NullEffect new ].
+
+	aBoard := Board
+		          withTileEffectCollection: aTileArray
+		          withLengthInUnits: (Parsec withNominalValue: 10)
+		          withAmountOfLaps: 1.
+	aCollectionOfNames := OrderedCollection
+		                      with: 'Juan'
+		                      with: 'Jose'
+		                      with: 'Pedro'.
+	aCollectionOfDie := OrderedCollection with:
+		                    (SequenceDie withSequence: #( 5 5 4 3 2)).
+
+	collectionOfCards := OrderedCollection new.
+	4 timesRepeat: [ collectionOfCards add: MercenaryCard ].
+	collectionOfCards add: ReversalCard.
+	aDeck := LoadedDeck withCards: collectionOfCards.
+
+	aGame := Game
+		         withBoard: aBoard
+		         withShipNames: aCollectionOfNames
+		         withDice: (Dice with: aCollectionOfDie)
+		         withDeck: aDeck.
+
+
+	aTarget := ShipTarget withObjective: 'Jose'.
+	anotherTarget := CardTarget withObjective:
+		                 (MercenaryCard
+			                  withHolder: 'Juan'
+			                  andTarget: aTarget).
+
+	aGame playCard: MercenaryCard by: 'Juan' toTarget: aTarget.
+	aGame skipTurn .
+	aGame skipTurn .
+	aGame playCard: ReversalCard by: 'Pedro' toTarget: anotherTarget.
+	aGame playTurn.
+	aGame playTurn.
+
+	self assert: (aGame allShipAmountOfShields at: 'Juan') equals: 2.
+	self assert: (aGame allShipAmountOfShields at: 'Jose') equals: 3.
+	self assert: (aGame allShipAmountOfShields at: 'Pedro') equals: 3
+]
+
+{ #category : #tests }
 CardsTest >> testWhenReversalCardIsPlayedTargetingAnSpeedCardShipMovesOneLessTile [
 
 	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget anotherTarget |

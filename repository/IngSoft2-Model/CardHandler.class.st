@@ -10,7 +10,7 @@ Class {
 		'lastCardPlayed',
 		'inPlayDeck',
 		'gameDeck',
-		'coalitions'
+		'coalitionHandler'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -32,7 +32,13 @@ CardHandler >> activateCard: aCardToPlay withTarget: aTarget [
 { #category : #accessing }
 CardHandler >> addCoalition: aCoalition [
 
-	coalitions add: aCoalition
+	coalitionHandler addToCoalitions: aCoalition
+]
+
+{ #category : #accessing }
+CardHandler >> addReverseCoalition: aCoalition [
+
+	coalitionHandler modifyReverseCoalitions: aCoalition
 ]
 
 { #category : #comparing }
@@ -45,6 +51,13 @@ CardHandler >> addToActiveCards: aCard [
 CardHandler >> applyLastEffectOn: aTarget [
 
 	game applyLastEffectOn: aTarget
+]
+
+{ #category : #comparing }
+CardHandler >> armyOf: aShip withEnemy: aEnemyShip [
+	
+	^ coalitionHandler armyOf: aShip withEnemy: aEnemyShip.
+
 ]
 
 { #category : #accessing }
@@ -86,26 +99,13 @@ CardHandler >> initalizeWithDeck: aDeck andGame: aGame [
 	activeCards := OrderedCollection new.
 	lastCardPlayed := NullCard new.
 	game := aGame.
-	coalitions := OrderedCollection new
+	coalitionHandler := CoalitionHandler new.
 ]
 
 { #category : #accessing }
 CardHandler >> lastCardPlayed [
 
 	^ lastCardPlayed
-]
-
-{ #category : #comparing }
-CardHandler >> mercenariesOf: aShip [
-
-	| mercenaryCollection |
-
-	mercenaryCollection := (coalitions select: [ :coalition |
-		                        coalition hasLeader: aShip shipName ])
-		                       collect: [ :coalition | coalition mercenary ].
-	
-	mercenaryCollection add: aShip shipName.
-	^ mercenaryCollection
 ]
 
 { #category : #modifying }
@@ -127,10 +127,10 @@ CardHandler >> removeCardFromShipDeck: aCard [
 { #category : #comparing }
 CardHandler >> removeCoalitionOf: aLeader and: aMercenary [
 
-	coalitions removeAllSuchThat: [ :coalition |
-		coalition = (ShipCoalition
-			withLeader: aLeader
-			andMercenary: aMercenary objective) ]
+	coalitionHandler removeCoalition:
+		(ShipCoalition
+			 withLeader: aLeader
+			 andMercenary: aMercenary objective)
 ]
 
 { #category : #comparing }
@@ -142,7 +142,14 @@ CardHandler >> removeFromActiveCard: aTarget [
 { #category : #comparing }
 CardHandler >> reverseCard: aCard [
 
-	(activeCards detect: [ :card | card = aCard objective]) reverseCardEffect.
+	(activeCards detect: [ :card | card = aCard objective ])
+		reverseCardEffectWith: self
+]
+
+{ #category : #'as yet unclassified' }
+CardHandler >> reverseCoalition: aCoalition [
+
+	coalitionHandler modifyReverseCoalitions: aCoalition
 ]
 
 { #category : #generating }
@@ -163,7 +170,7 @@ CardHandler >> validateCard: aCard [
 { #category : #comparing }
 CardHandler >> verifyCoalition: mercenaryShip [
 
-	(coalitions anySatisfy: [ :coalition |
+	(coalitionHandler anySatisfy: [ :coalition |
 		 coalition mercenary = mercenaryShip ]) ifTrue: [
 		CardExeption signal:
 			'Targeted ship is already a mercenary in another coalition' ]

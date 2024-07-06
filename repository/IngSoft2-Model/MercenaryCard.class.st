@@ -9,7 +9,6 @@ MercenaryCard >> activate: aCardHandler withTarget: aTarget [
 
 	target := aTarget.
 	
-	aCardHandler verifyCoalition: target objective.
 	aCardHandler addCoalition:
 		(ShipCoalition withLeader: holder andMercenary: target objective).
 	aCardHandler addToActiveCards: self.
@@ -26,4 +25,11 @@ MercenaryCard >> canPlayRightNow: theShipInTurn [
 MercenaryCard >> deactivate: aCardHandler [
 
 	aCardHandler removeCoalitionOf: holder and: target
+]
+
+{ #category : #'as yet unclassified' }
+MercenaryCard >> reverseCardEffectWith: anCardHandler [
+
+	anCardHandler reverseCoalition:
+		(ShipCoalition withLeader: holder andMercenary: target objective)
 ]

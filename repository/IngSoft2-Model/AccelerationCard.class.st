@@ -26,7 +26,7 @@ AccelerationCard >> canPlayRightNow: theShipInTurn [
 ]
 
 { #category : #'as yet unclassified' }
-AccelerationCard >> reverseCardEffect [
+AccelerationCard >> reverseCardEffectWith: anCardHandler [
 
 	movement := movement negated
 ]
