@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #testing }
-NullTarget >> isValidWith: aCollection and: aCardHandler [ 
-		
+NullTarget >> isValidWith: aCollection and: aCardHandler and: aBoard [
+
 	^ Error signal: 'No target has been set'
 ]

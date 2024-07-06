@@ -140,3 +140,14 @@ Board >> snapToFinishTile: aShip [
 
 	aShip lapsDone > maxLap ifTrue: [ aShip moveToFirstTile ]
 ]
+
+{ #category : #'as yet unclassified' }
+Board >> updateReversedEffectsWith: aCollectionOfTilesToReverse [
+
+	aCollectionOfTilesToReverse do: [ :position |
+		tileEffectArray
+			at: position
+			put:
+			(ReverseEffectDecorator withEffect:
+				 (self effectInPosition: position)) ]
+]

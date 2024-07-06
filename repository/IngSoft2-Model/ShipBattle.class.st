@@ -75,8 +75,9 @@ ShipBattle >> shipWithName: aShipName [
 
 { #category : #event }
 ShipBattle >> shipsNames: aShipsNameCollection [
-	
-	^ aShipsNameCollection collect: [ :shipName | self shipWithName: shipName  ].
+
+	^ aShipsNameCollection collect: [ :shipName |
+		  self shipWithName: shipName ]
 ]
 
 { #category : #'as yet unclassified' }

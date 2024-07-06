@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #testing }
-CardTarget >> isValidWith: aCollectionOfShips and: aCardHandler [ 
-	
-	^aCardHandler checkTarget: objective
+CardTarget >> isValidWith: aCollectionOfShips and: aCardHandler and: aBoard [
+
+	^ aCardHandler checkTarget: objective
 ]

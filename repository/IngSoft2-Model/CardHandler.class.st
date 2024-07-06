@@ -10,7 +10,8 @@ Class {
 		'lastCardPlayed',
 		'inPlayDeck',
 		'gameDeck',
-		'coalitionHandler'
+		'coalitionHandler',
+		'reverseEffects'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -94,6 +95,7 @@ CardHandler >> initalizeWithDeck: aDeck andGame: aGame [
 	lastCardPlayed := NullCard new.
 	game := aGame.
 	coalitionHandler := CoalitionHandler new.
+	reverseEffects := OrderedCollection new
 ]
 
 { #category : #accessing }
@@ -144,6 +146,22 @@ CardHandler >> reverseCard: aCard [
 CardHandler >> reverseCoalition: aCoalition [
 
 	coalitionHandler modifyReverseCoalitions: aCoalition
+]
+
+{ #category : #'as yet unclassified' }
+CardHandler >> reverseEffectAtPosition: aTileTarget [
+
+	reverseEffects add: aTileTarget objective
+]
+
+{ #category : #'as yet unclassified' }
+CardHandler >> reversedEffects [
+
+	| reverseEffectsCopy |
+	reverseEffectsCopy := reverseEffects copy.
+	reverseEffects := OrderedCollection new.
+	
+	^ reverseEffectsCopy
 ]
 
 { #category : #generating }

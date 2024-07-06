@@ -129,6 +129,12 @@ Game >> canPlayNextTurnOf [
 		Error signal: 'Game is Over you cant Keep Playing' ].
 ]
 
+{ #category : #'as yet unclassified' }
+Game >> checkForReversedEffects [
+
+	gameBoard updateReversedEffectsWith: (gameCardHandler reversedEffects)
+]
+
 { #category : #event }
 Game >> giveCardToCurrentShip: aShip [
 
@@ -166,6 +172,7 @@ Game >> playCard: aCard by: aShipName toTarget: aTarget [
 
 	gameCardHandler validateCard: aCardToPlay.
 	self targetIsValid: aTarget.
+	
 	(aCardToPlay canPlayRightNow: theShipInCurrentTurn) ifFalse: [
 		CardExeption signal:
 			'Ship cannot throw this card as its not his turn' ].
@@ -196,7 +203,8 @@ Game >> playTurn [
 	self adjustShipPosition: theShipInCurrentTurn.
 	lastEffect := gameBoard effectInPosition:
 		              theShipInCurrentTurn position.
-
+	
+	self checkForReversedEffects.
 	gameBoard applyTileEffectOn: self triggeredBy: theShipInCurrentTurn.
 	shipBattleHandler
 		checkShipBattle: theShipInCurrentTurn
@@ -254,8 +262,8 @@ Game >> skipTurn [
 { #category : #validating }
 Game >> targetIsValid: aTarget [
 
-	(aTarget isValidWith: gameShips and: gameCardHandler) ifFalse: [
-		CardExeption signal: 'Target is not valid' ]
+	(aTarget isValidWith: gameShips and: gameCardHandler and: gameBoard)
+		ifFalse: [ CardExeption signal: 'Target is not valid' ]
 ]
 
 { #category : #accessing }

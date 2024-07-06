@@ -31,9 +31,9 @@ Card >> = aCard [
 ]
 
 { #category : #event }
-Card >> activate: aCardHandler withTarget: aShipName [
+Card >> activate: aCardHandler withTarget: aTilePosition [
 
-	^ self subclassResponsibility
+	self subclassResponsibility 
 ]
 
 { #category : #comparing }

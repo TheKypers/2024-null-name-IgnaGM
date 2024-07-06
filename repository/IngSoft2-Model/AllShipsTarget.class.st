@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #testing }
-AllShipsTarget >> isValidWith: aCollection and: aCardHandler [
+AllShipsTarget >> isValidWith: aCollection and: aCardHandler and: aBoard [
 
 	^ true
 ]

@@ -5,8 +5,7 @@ Class {
 }
 
 { #category : #testing }
-ShipTarget >> isValidWith: aCollectionOfShips and: aCardHandler [ 
-	
-	^(aCollectionOfShips anySatisfy: [ :ship | ship shipName = objective  ])
-	
+ShipTarget >> isValidWith: aCollectionOfShips and: aCardHandler and: aBoard [
+
+	^ aCollectionOfShips anySatisfy: [ :ship | ship shipName = objective ]
 ]
