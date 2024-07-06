@@ -335,7 +335,7 @@ CardsTest >> testWhenReversalCardIsPlayedTargetingAnAccelerationCardShipMovesOne
 ]
 
 { #category : #tests }
-CardsTest >> testWhenReversalCardIsPlayedTargetingAnMercenaryCardBanana [
+CardsTest >> testWhenReversalCardIsPlayedTargetingAnMercenaryCardMercenaryShipHelpsEnemyWhenLeaderIsInBattle [
 
 	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget anotherTarget |
 	aTileArray := OrderedCollection new.
@@ -426,4 +426,53 @@ CardsTest >> testWhenReversalCardIsPlayedTargetingAnSpeedCardShipMovesOneLessTil
 	self assert: (aGame allShipsPosition  at: 'Juan') equals: #(6 1) asOrderedCollection .
 	self assert: (aGame allShipsPosition at: 'Jose') equals: #(5 1) asOrderedCollection.
 	
+]
+
+{ #category : #tests }
+CardsTest >> testWhenTwoReversalCardArePlayedTargetingAnMercenaryCardMercenaryTheyCancelOut [
+
+	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget anotherTarget |
+	aTileArray := OrderedCollection new.
+	10 timesRepeat: [ aTileArray add: NullEffect new ].
+
+	aBoard := Board
+		          withTileEffectCollection: aTileArray
+		          withLengthInUnits: (Parsec withNominalValue: 10)
+		          withAmountOfLaps: 1.
+	aCollectionOfNames := OrderedCollection
+		                      with: 'Juan'
+		                      with: 'Jose'
+		                      with: 'Pedro'.
+	aCollectionOfDie := OrderedCollection with:
+		                    (SequenceDie withSequence: #( 5 5 4 2 5 )).
+
+	collectionOfCards := OrderedCollection new.
+	4 timesRepeat: [ collectionOfCards add: MercenaryCard ].
+	4 timesRepeat: [ collectionOfCards add: ReversalCard ].
+	aDeck := LoadedDeck withCards: collectionOfCards.
+
+	aGame := Game
+		         withBoard: aBoard
+		         withShipNames: aCollectionOfNames
+		         withDice: (Dice with: aCollectionOfDie)
+		         withDeck: aDeck.
+
+
+	aTarget := ShipTarget withObjective: 'Jose'.
+	anotherTarget := CardTarget withObjective:
+		                 (MercenaryCard
+			                  withHolder: 'Juan'
+			                  andTarget: aTarget).
+
+	aGame playCard: MercenaryCard by: 'Juan' toTarget: aTarget.
+	aGame skipTurn.
+	aGame skipTurn.
+	aGame playCard: ReversalCard by: 'Pedro' toTarget: anotherTarget.
+	aGame playCard: ReversalCard by: 'Pedro' toTarget: anotherTarget.
+	aGame playTurn.
+	aGame playTurn.
+
+	self assert: (aGame allShipAmountOfShields at: 'Juan') equals: 3.
+	self assert: (aGame allShipAmountOfShields at: 'Jose') equals: 3.
+	self assert: (aGame allShipAmountOfShields at: 'Pedro') equals: 2
 ]

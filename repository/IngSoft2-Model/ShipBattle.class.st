@@ -88,7 +88,8 @@ ShipBattle >> throwForBattle: anArmy [
 	anArmy do: [ :aShipInArmy |
 		| cardMovement |
 		cardMovement := cardHanlder movementCardsActivated: aShipInArmy.
-		armyOfShipsDiceRoll + dice throw + cardMovement ].
-	
-	^armyOfShipsDiceRoll
+		armyOfShipsDiceRoll := armyOfShipsDiceRoll + dice throw
+		                       + cardMovement ].
+
+	^ armyOfShipsDiceRoll
 ]
