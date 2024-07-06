@@ -160,12 +160,3 @@ CardHandler >> validateCard: aCard [
 		detect: [ :card | card = aCard ]
 		ifNone: [ CardExeption signal: 'Ship does not have that card' ]
 ]
-
-{ #category : #comparing }
-CardHandler >> verifyCoalition: mercenaryShip [
-
-	(coalitionHandler anySatisfy: [ :coalition |
-		 coalition mercenary = mercenaryShip ]) ifTrue: [
-		CardExeption signal:
-			'Targeted ship is already a mercenary in another coalition' ]
-]
