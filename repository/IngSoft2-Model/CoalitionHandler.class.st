@@ -27,12 +27,12 @@ CoalitionHandler >> alliesWithEnemy: aEnemyShip [
 { #category : #comparing }
 CoalitionHandler >> armyOf: aShip withEnemy: aEnemyShip [
 
-	| mercenaryCollection rougeMercenaryCollection combinedSet armyCollection|
-	
+	| mercenaryCollection rougeMercenaryCollection combinedSet armyCollection |
 	mercenaryCollection := self mercenariesOfShips: aShip.
 	rougeMercenaryCollection := self alliesWithEnemy: aEnemyShip.
-	
-	combinedSet := mercenaryCollection asSet union: rougeMercenaryCollection asSet.
+
+	combinedSet := mercenaryCollection asSet union:
+		               rougeMercenaryCollection asSet.
 	armyCollection := OrderedCollection withAll: combinedSet asArray.
 
 	^ armyCollection
