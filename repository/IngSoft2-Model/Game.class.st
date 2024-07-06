@@ -132,7 +132,7 @@ Game >> canPlayNextTurnOf [
 { #category : #'as yet unclassified' }
 Game >> checkForReversedEffects [
 
-	gameBoard updateReversedEffectsWith: (gameCardHandler reversedEffects)
+	gameBoard updateReversedEffectsWith: (gameCardHandler positionsToReversePolarity)
 ]
 
 { #category : #event }

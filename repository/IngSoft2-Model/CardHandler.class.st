@@ -11,7 +11,7 @@ Class {
 		'inPlayDeck',
 		'gameDeck',
 		'coalitionHandler',
-		'reverseEffects'
+		'reverseEffectPolarityPositions'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -34,6 +34,12 @@ CardHandler >> activateCard: aCardToPlay withTarget: aTarget [
 CardHandler >> addCoalition: aCoalition [
 
 	coalitionHandler addToCoalitions: aCoalition
+]
+
+{ #category : #'as yet unclassified' }
+CardHandler >> addPositionOfEffectToReversePolarity: aTileTarget [
+
+	reverseEffectPolarityPositions add: aTileTarget objective
 ]
 
 { #category : #comparing }
@@ -95,7 +101,7 @@ CardHandler >> initalizeWithDeck: aDeck andGame: aGame [
 	lastCardPlayed := NullCard new.
 	game := aGame.
 	coalitionHandler := CoalitionHandler new.
-	reverseEffects := OrderedCollection new
+	reverseEffectPolarityPositions := OrderedCollection new
 ]
 
 { #category : #accessing }
@@ -110,6 +116,16 @@ CardHandler >> movementCardsActivated: theShipInTurn [
 	^ ((activeCards select: [ :card |
 		    card shouldApplyOn: theShipInTurn shipName ]) sumNumbers: [
 		   :card | card applyMovement ])
+]
+
+{ #category : #'as yet unclassified' }
+CardHandler >> positionsToReversePolarity [
+
+	| reverseEffectsCopy |
+	reverseEffectsCopy := reverseEffectPolarityPositions copy.
+	reverseEffectPolarityPositions := OrderedCollection new.
+
+	^ reverseEffectsCopy
 ]
 
 { #category : #comparing }
@@ -146,22 +162,6 @@ CardHandler >> reverseCard: aCard [
 CardHandler >> reverseCoalition: aCoalition [
 
 	coalitionHandler modifyReverseCoalitions: aCoalition
-]
-
-{ #category : #'as yet unclassified' }
-CardHandler >> reverseEffectAtPosition: aTileTarget [
-
-	reverseEffects add: aTileTarget objective
-]
-
-{ #category : #'as yet unclassified' }
-CardHandler >> reversedEffects [
-
-	| reverseEffectsCopy |
-	reverseEffectsCopy := reverseEffects copy.
-	reverseEffects := OrderedCollection new.
-	
-	^ reverseEffectsCopy
 ]
 
 { #category : #generating }
