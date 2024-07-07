@@ -5,9 +5,8 @@ Class {
 }
 
 { #category : #event }
-SpeedCard >> activate: aCardHandler withTarget: aTarget [
+SpeedCard >> activateWith: aCardHandler [
 
-	target := aTarget.
 	movement := 1.
 	aCardHandler addToActiveCards: self.
 	aCardHandler changeLastCardTo: self

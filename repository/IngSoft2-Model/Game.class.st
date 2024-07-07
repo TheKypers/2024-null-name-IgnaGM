@@ -168,7 +168,7 @@ Game >> isFinished [
 Game >> playCard: aCard by: aShipName toTarget: aTarget [
 
 	| aCardToPlay |
-	aCardToPlay := aCard withHolder: aShipName andTarget: NullTarget new.
+	aCardToPlay := aCard withHolder: aShipName andTarget: aTarget.
 
 	gameCardHandler validateCard: aCardToPlay.
 	self targetIsValid: aTarget.
@@ -177,7 +177,7 @@ Game >> playCard: aCard by: aShipName toTarget: aTarget [
 		CardExeption signal:
 			'Ship cannot throw this card as its not his turn' ].
 
-	[ gameCardHandler activateCard: aCardToPlay withTarget: aTarget ]
+	[ gameCardHandler activateCard: aCardToPlay ]
 		on: CardExeption
 		do: [ :ex | ^ ex messageText ].
 		

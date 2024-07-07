@@ -31,7 +31,7 @@ Card >> = aCard [
 ]
 
 { #category : #event }
-Card >> activate: aCardHandler withTarget: aTilePosition [
+Card >> activateWith: aCardHandler [
 
 	self subclassResponsibility 
 ]

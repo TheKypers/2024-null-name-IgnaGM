@@ -5,13 +5,11 @@ Class {
 }
 
 { #category : #event }
-RedoCard >> activate: aCardHandler withTarget: aTarget [
+RedoCard >> activateWith: aCardHandler [
 
-	target := aTarget.
-	aCardHandler
-		activateCard: (aCardHandler lastCardPlayed class withHolder: holder)
-		withTarget: aTarget
-	
+	aCardHandler activateCard: (aCardHandler lastCardPlayed class
+			 withHolder: holder
+			 andTarget: target)
 ]
 
 { #category : #comparing }

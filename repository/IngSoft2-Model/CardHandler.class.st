@@ -25,9 +25,9 @@ CardHandler class >> withDeck: aDeck andGame: aGame [
 ]
 
 { #category : #generating }
-CardHandler >> activateCard: aCardToPlay withTarget: aTarget [
+CardHandler >> activateCard: aCardToPlay [
 
-	aCardToPlay activate: self withTarget: aTarget
+	aCardToPlay activateWith: self
 ]
 
 { #category : #accessing }

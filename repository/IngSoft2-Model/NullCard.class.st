@@ -8,9 +8,8 @@ Class {
 }
 
 { #category : #event }
-NullCard >> activate: aCardHandler withTarget: aTarget [
+NullCard >> activateWith: aCardHandler [
 
-	target := aTarget.
 	aCardHandler changeLastCardTo: self.
 	^ self
 ]

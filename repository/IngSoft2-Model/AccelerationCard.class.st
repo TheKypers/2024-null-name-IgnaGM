@@ -5,9 +5,8 @@ Class {
 }
 
 { #category : #event }
-AccelerationCard >> activate: aCardHandler withTarget: aTarget [
+AccelerationCard >> activateWith: aCardHandler [
 
-	target := aTarget.
 	movement  := 1.
 	aCardHandler addToActiveCards: self.
 	aCardHandler changeLastCardTo: self

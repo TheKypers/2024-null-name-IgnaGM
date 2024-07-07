@@ -5,9 +5,9 @@ Class {
 }
 
 { #category : #event }
-ReversalCard >> activate: aCardHandler withTarget: aCard [
+ReversalCard >> activateWith: aCardHandler [
 
-	^ aCardHandler reverseCard: aCard
+	^ aCardHandler reverseCard: target
 ]
 
 { #category : #comparing }

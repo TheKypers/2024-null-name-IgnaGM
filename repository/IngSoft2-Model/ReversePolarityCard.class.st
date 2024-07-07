@@ -5,9 +5,9 @@ Class {
 }
 
 { #category : #event }
-ReversePolarityCard >> activate: aCardHandler withTarget: aTilePosition [
+ReversePolarityCard >> activateWith: aCardHandler [
 
-	aCardHandler addPositionOfEffectToReversePolarity: aTilePosition.
+	aCardHandler addPositionOfEffectToReversePolarity: target.
 	aCardHandler addToActiveCards: self
 ]
 
