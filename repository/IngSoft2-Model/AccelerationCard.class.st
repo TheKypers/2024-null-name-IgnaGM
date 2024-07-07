@@ -1,3 +1,7 @@
+"
+a
+
+"
 Class {
 	#name : #AccelerationCard,
 	#superclass : #Card,

@@ -1,3 +1,6 @@
+"
+a
+"
 Class {
 	#name : #ReversePolarityCard,
 	#superclass : #Card,

@@ -155,8 +155,7 @@ CardHandler >> reverseEffectPolarity: aPositionTarget [
 { #category : #generating }
 CardHandler >> startingCards: aShipName [
 
-	2 timesRepeat: [
-		inPlayDeck add: (gameDeck cardAtRandom withHolder: aShipName) ]
+	2 timesRepeat: [ self giveCardTo: aShipName ]
 ]
 
 { #category : #comparing }

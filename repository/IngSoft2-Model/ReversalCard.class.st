@@ -1,3 +1,7 @@
+"
+a
+
+"
 Class {
 	#name : #ReversalCard,
 	#superclass : #Card,

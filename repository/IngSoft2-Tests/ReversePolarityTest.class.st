@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #tests }
-ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingABlackHoleEffectTheEffectTargetedIsReversed [
+ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingABlackHoleEffectTheEffectTargetIsReversed [
 
 	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget |
 	aTileArray := OrderedCollection new.
@@ -47,7 +47,7 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingABlackHoleEff
 ]
 
 { #category : #tests }
-ReversePolarityTest >> testWhenReversePolarityTargetigAnEffectIsAffectedByAReversalCardTheEffectAffectsItsNormalTarget [
+ReversePolarityTest >> testWhenReversePolarityTargetigAnEffectIsAffectedByAReversalCardTheEffectIsNormalyApplied [
 
 	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget anotherTarget |
 	aTileArray := OrderedCollection new.
