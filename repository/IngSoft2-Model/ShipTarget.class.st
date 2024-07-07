@@ -4,8 +4,8 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #testing }
-ShipTarget >> isValidWith: aCollectionOfShips and: aCardHandler and: aBoard [
+{ #category : #verification }
+ShipTarget >> isValidWith: aTargetValidator [
 
-	^ aCollectionOfShips anySatisfy: [ :ship | ship shipName = objective ]
+	aTargetValidator shipTargetIsValid: objective .
 ]

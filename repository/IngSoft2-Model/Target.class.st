@@ -19,8 +19,8 @@ Target >> initializeWithObjective: anObjective [
 	objective := anObjective.
 ]
 
-{ #category : #testing }
-Target >> isValidWith: aCollection and: aCardHandler and: aBoard [
+{ #category : #verification }
+Target >> isValidWith: aTargetValidator [
 
 	self subclassResponsibility
 ]

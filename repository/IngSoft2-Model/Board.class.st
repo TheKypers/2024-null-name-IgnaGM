@@ -127,7 +127,7 @@ Board >> numbOfTiles [
 	^ tileEffectArray size
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #event }
 Board >> reversePolarityAt: aPosition [
 
 	tileEffectArray

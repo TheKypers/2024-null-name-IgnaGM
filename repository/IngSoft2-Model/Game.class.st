@@ -12,7 +12,8 @@ Class {
 		'shipBattleHandler',
 		'theShipInCurrentTurn',
 		'gameCardHandler',
-		'gameEffectHandler'
+		'gameEffectHandler',
+		'targetValidator'
 	],
 	#classInstVars : [
 		'isFinished'
@@ -120,6 +121,9 @@ Game >> initializeGameWith: aBoard withShipNames: aNameCollection withDice: aDic
 		                     andGame: self.
 
 	gameCardHandler := CardHandler withDeck: aDeck andEffectHandler: gameEffectHandler.
+	
+	targetValidator := TargetValidator with: gameBoard and: gameShips and:  gameCardHandler.
+
 	theShipInCurrentTurn := gameTurnHandler currentTurnShip.
 	gameShips do: [ :ship | gameCardHandler startingCards: ship shipName ]
 ]
@@ -137,7 +141,7 @@ Game >> playCard: aCard by: aShipName toTarget: aTarget [
 	aCardToPlay := aCard withHolder: aShipName andTarget: aTarget.
 
 	gameCardHandler validateCard: aCardToPlay.
-	self targetIsValid: aTarget.
+	targetValidator targetIsValid: aTarget.
 	
 	(aCardToPlay canPlayRightNow: theShipInCurrentTurn) ifFalse: [
 		CardExeption signal:
@@ -218,13 +222,6 @@ Game >> skipTurn [
 	theShipInCurrentTurn := gameTurnHandler currentTurnShip.
 	
 	^ skipedTurn
-]
-
-{ #category : #validating }
-Game >> targetIsValid: aTarget [
-
-	(aTarget isValidWith: gameShips and: gameCardHandler and: gameBoard)
-		ifFalse: [ CardExeption signal: 'Target is not valid' ]
 ]
 
 { #category : #accessing }

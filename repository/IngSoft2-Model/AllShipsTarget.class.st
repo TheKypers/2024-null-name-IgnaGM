@@ -4,8 +4,8 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #testing }
-AllShipsTarget >> isValidWith: aCollection and: aCardHandler and: aBoard [
+{ #category : #verification }
+AllShipsTarget >> isValidWith: aTargetValidator [
 
-	^ true
+	^ self
 ]

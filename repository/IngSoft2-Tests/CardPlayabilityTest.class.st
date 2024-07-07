@@ -110,20 +110,20 @@ CardPlayabilityTest >> testCannotPlayACardThatHasInvalidTarget [
 	collectionOfCards := OrderedCollection new.
 	10 timesRepeat: [ collectionOfCards add: SpeedCard ].
 	aDeck := LoadedDeck withCards: collectionOfCards.
-	
-	
+
+
 	aGame := Game
 		         withBoard: aBoard
 		         withShipNames: aCollectionOfNames
 		         withDice: (Dice with: aCollectionOfDie)
 		         withDeck: aDeck.
-	
+
 	aTarget := ShipTarget withObjective: 'Juan'.
-	
+
 	self
 		should: [ aGame playCard: SpeedCard by: 'Jose' toTarget: aTarget ]
 		raise: CardExeption
-		withMessage: 'Target is not valid'
+		withMessage: 'Targeted ship is not valid'
 ]
 
 { #category : #tests }

@@ -4,11 +4,8 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #testing }
-TileTarget >> isValidWith: aCollectionOfShips and: aCardHandler and: aBoard [
+{ #category : #verification }
+TileTarget >> isValidWith: aTargetValidator [
 
-	(aBoard numbOfTiles < objective) ifTrue: [
-		Error signal: 'Targeted tile is out of bounds' ].
-
-	^ true
+	aTargetValidator tileTargetIsValid: objective
 ]

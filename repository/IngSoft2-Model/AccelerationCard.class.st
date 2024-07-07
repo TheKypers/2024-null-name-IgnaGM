@@ -24,7 +24,7 @@ AccelerationCard >> canPlayRightNow: theShipInTurn [
 	^ theShipInTurn shipName = holder
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #event }
 AccelerationCard >> reverseCardEffectWith: anCardHandler [
 
 	movement := movement negated

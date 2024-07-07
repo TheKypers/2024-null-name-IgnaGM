@@ -147,9 +147,9 @@ CardHandler >> reverseCoalition: aCoalition [
 ]
 
 { #category : #'as yet unclassified' }
-CardHandler >> reverseEffectPolarity: aTileTarget [
+CardHandler >> reverseEffectPolarity: aPositionTarget [
 
-	effectHandler reversePolarityOfEffectAt: aTileTarget.
+	effectHandler reversePolarityOfEffectAt: aPositionTarget
 ]
 
 { #category : #generating }

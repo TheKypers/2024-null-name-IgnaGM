@@ -67,20 +67,20 @@ ShipBattle >> resolveBattleBetween: aShip and: anotherShip [
 		aEnemyShip moveToFirstTile ]
 ]
 
-{ #category : #event }
+{ #category : #translating }
 ShipBattle >> shipWithName: aShipName [
 
 	^ ships detect: [ :ship | ship shipName = aShipName ]
 ]
 
-{ #category : #event }
+{ #category : #translating }
 ShipBattle >> shipsNames: aShipsNameCollection [
 
 	^ aShipsNameCollection collect: [ :shipName |
 		  self shipWithName: shipName ]
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #event }
 ShipBattle >> throwForBattle: anArmy [
 
 	| armyOfShipsDiceRoll |

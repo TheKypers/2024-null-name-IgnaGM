@@ -22,3 +22,9 @@ ReversePolarityCard >> deactivate: aCardHandler [
 
 	aCardHandler reverseEffectPolarity: target
 ]
+
+{ #category : #event }
+ReversePolarityCard >> reverseCardEffectWith: aCardHandler [
+
+	aCardHandler reverseEffectPolarity: target
+]

@@ -25,7 +25,7 @@ MercenaryCard >> deactivate: aCardHandler [
 	aCardHandler removeCoalitionOf: holder and: target
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #event }
 MercenaryCard >> reverseCardEffectWith: anCardHandler [
 
 	anCardHandler reverseCoalition:

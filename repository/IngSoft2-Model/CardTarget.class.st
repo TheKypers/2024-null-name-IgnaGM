@@ -4,8 +4,8 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #testing }
-CardTarget >> isValidWith: aCollectionOfShips and: aCardHandler and: aBoard [
+{ #category : #verification }
+CardTarget >> isValidWith: aTargetValidator [
 
-	^ aCardHandler checkTarget: objective
+	^ aTargetValidator cardIsValid: objective 
 ]
