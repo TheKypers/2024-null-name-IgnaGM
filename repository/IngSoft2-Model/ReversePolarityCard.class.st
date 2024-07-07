@@ -7,7 +7,7 @@ Class {
 { #category : #event }
 ReversePolarityCard >> activateWith: aCardHandler [
 
-	aCardHandler addPositionOfEffectToReversePolarity: target.
+	aCardHandler reverseEffectPolarity: target.
 	aCardHandler addToActiveCards: self
 ]
 
@@ -20,5 +20,5 @@ ReversePolarityCard >> canPlayRightNow: theShipInTurn [
 { #category : #event }
 ReversePolarityCard >> deactivate: aCardHandler [
 
-	aCardHandler addPositionOfEffectToReversePolarity: target
+	aCardHandler reverseEffectPolarity: target
 ]

@@ -80,10 +80,10 @@ Board >> allTileEffectsAmount [
 ]
 
 { #category : #modifying }
-Board >> applyTileEffectOn: aGame triggeredBy: aShip [
+Board >> applyTileEffectWith: aEffectManager triggeredBy: aShip [
 
 	(tileEffectArray at: aShip position)
-		applyOn: aGame
+		applyWith: aEffectManager
 		activatedBy: aShip
 ]
 
@@ -127,6 +127,16 @@ Board >> numbOfTiles [
 	^ tileEffectArray size
 ]
 
+{ #category : #'as yet unclassified' }
+Board >> reversePolarityAt: aPosition [
+
+	tileEffectArray
+		at: aPosition
+		put:
+		(ReverseEffectDecorator withEffect:
+			 (self effectInPosition: aPosition))
+]
+
 { #category : #accessing }
 Board >> shouldAdjustShipPosition: aShip [
 
@@ -139,15 +149,4 @@ Board >> shouldAdjustShipPosition: aShip [
 Board >> snapToFinishTile: aShip [
 
 	aShip lapsDone > maxLap ifTrue: [ aShip moveToFirstTile ]
-]
-
-{ #category : #'as yet unclassified' }
-Board >> updateReversedEffectsWith: aCollectionOfTilesToReverse [
-
-	aCollectionOfTilesToReverse do: [ :position |
-		tileEffectArray
-			at: position
-			put:
-			(ReverseEffectDecorator withEffect:
-				 (self effectInPosition: position)) ]
 ]

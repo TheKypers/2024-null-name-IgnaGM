@@ -14,7 +14,7 @@ EffectOnAllShips >> affectAShipCollection: aShipCollection [
 ]
 
 { #category : #applying }
-EffectOnAllShips >> applyOn: aGame activatedBy: aShip [
+EffectOnAllShips >> applyWith: anEffectManager activatedBy: aShip [
 
-	aGame applyEffectOnAllShips: self
+	anEffectManager applyEffectOnAllShips: self
 ]

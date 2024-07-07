@@ -8,9 +8,9 @@ Class {
 }
 
 { #category : #applying }
-Effect >> applyOn: aGame activatedBy: aShip [
+Effect >> applyWith: anEffectManager activatedBy: aShip [
 
-	self subclassResponsibility.
+	self subclassResponsibility
 ]
 
 { #category : #generators }

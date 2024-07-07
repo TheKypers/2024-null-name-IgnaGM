@@ -14,15 +14,15 @@ ReverseEffectDecorator class >> withEffect: anEffect [
 ]
 
 { #category : #applying }
-ReverseEffectDecorator >> applyOn: aGame activatedBy: aShip [
+ReverseEffectDecorator >> applyReverseOn: aGame activatedBy: aShip [
 
-	effectWrapped applyReverseOn: aGame activatedBy: aShip
+	effectWrapped applyWith: aGame activatedBy: aShip
 ]
 
 { #category : #applying }
-ReverseEffectDecorator >> applyReverseOn: aGame activatedBy: aShip [
+ReverseEffectDecorator >> applyWith: anEffectManager activatedBy: aShip [
 
-	effectWrapped applyOn: aGame activatedBy: aShip
+	effectWrapped applyReverseOn: anEffectManager activatedBy: aShip
 ]
 
 { #category : #initialization }

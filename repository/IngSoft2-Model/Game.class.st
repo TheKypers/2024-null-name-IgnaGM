@@ -12,7 +12,7 @@ Class {
 		'shipBattleHandler',
 		'theShipInCurrentTurn',
 		'gameCardHandler',
-		'lastEffect'
+		'gameEffectHandler'
 	],
 	#classInstVars : [
 		'isFinished'
@@ -91,37 +91,6 @@ Game >> allShipsPosition [
 	^ shipPositions
 ]
 
-{ #category : #event }
-Game >> applyEffectOnAllShips: anEffect [
-
-	anEffect affectAShipCollection: gameShips.
-	gameShips do: [ :aShip |
-		gameBoard adjustShipPosition: aShip.]
-]
-
-{ #category : #'as yet unclassified' }
-Game >> applyEffectOnAllShipsButOne: anEffect triggerByShip: aShip [
-
-	anEffect affectAllShips: gameShips but: aShip.
-	gameShips do: [ :anAffectedShip |
-		gameBoard adjustShipPosition: anAffectedShip ]
-]
-
-{ #category : #'as yet unclassified' }
-Game >> applyEffectOnOneShip: anEffect triggeredBy: aShip [
-
-	anEffect affectAShip: aShip.
-	gameBoard adjustShipPosition: aShip
-]
-
-{ #category : #generating }
-Game >> applyLastEffectOn: aTarget [
-
-	| aShip |
-	aShip := self shipWithName: aTarget objective.
-	lastEffect applyOn: self activatedBy: aShip
-]
-
 { #category : #testing }
 Game >> canPlayNextTurnOf [
 
@@ -129,17 +98,10 @@ Game >> canPlayNextTurnOf [
 		Error signal: 'Game is Over you cant Keep Playing' ].
 ]
 
-{ #category : #'as yet unclassified' }
-Game >> checkForReversedEffects [
-
-	gameBoard updateReversedEffectsWith: (gameCardHandler positionsToReversePolarity)
-]
-
-{ #category : #event }
+{ #category : #validating }
 Game >> giveCardToCurrentShip: aShip [
 
-	gameCardHandler
-		giveCardTo: aShip shipName.
+	gameCardHandler giveCardTo: aShip shipName
 ]
 
 { #category : #initialization }
@@ -152,9 +114,13 @@ Game >> initializeGameWith: aBoard withShipNames: aNameCollection withDice: aDic
 	dice := aDice.
 	gameTurnHandler := TurnHandler withShips: gameShips.
 	shipBattleHandler := ShipBattle withDice: dice withShips: gameShips.
-	gameCardHandler := CardHandler withDeck: aDeck andGame: self.
+	gameEffectHandler := EffectManager
+		                     withBoard: gameBoard
+		                     andShips: gameShips
+		                     andGame: self.
+
+	gameCardHandler := CardHandler withDeck: aDeck andEffectHandler: gameEffectHandler.
 	theShipInCurrentTurn := gameTurnHandler currentTurnShip.
-	lastEffect := NullEffect new.
 	gameShips do: [ :ship | gameCardHandler startingCards: ship shipName ]
 ]
 
@@ -187,25 +153,27 @@ Game >> playCard: aCard by: aShipName toTarget: aTarget [
 { #category : #modifying }
 Game >> playTurn [
 
-	| movement |
+	| diceMovement cardMovment lastEffect |
 	self canPlayNextTurnOf.
 
 	[ gameTurnHandler turnShipCanPlayTurn ]
 		on: TurnExeption
 		do: [ :ex | ^ ex messageText ].
 
-	movement := dice throw
-	            +
-	            (gameCardHandler movementCardsActivated:
-		             theShipInCurrentTurn).
-	theShipInCurrentTurn moveTiles: movement.
+	diceMovement := dice throw.
+	cardMovment := gameCardHandler movementCardsActivated:
+		               theShipInCurrentTurn.
+
+	theShipInCurrentTurn moveTiles: diceMovement + cardMovment.
 
 	self adjustShipPosition: theShipInCurrentTurn.
+
 	lastEffect := gameBoard effectInPosition:
 		              theShipInCurrentTurn position.
-	
-	self checkForReversedEffects.
-	gameBoard applyTileEffectOn: self triggeredBy: theShipInCurrentTurn.
+
+	gameEffectHandler lastEffectAppliedIs: lastEffect.
+	gameEffectHandler applyTileEffectTriggeredBy: theShipInCurrentTurn.
+
 	shipBattleHandler
 		checkShipBattle: theShipInCurrentTurn
 		withCardHandler: gameCardHandler.
@@ -232,12 +200,6 @@ Game >> shipRankings [
 		rankDictionary at: indice put: elemento ].
 
 	^ rankDictionary
-]
-
-{ #category : #accessing }
-Game >> shipWithName: aShipName [
-
-	^ gameShips detect: [ :ship | ship shipName = aShipName ]
 ]
 
 { #category : #modifying }

@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #applying }
-CardGeneratorEffect >> applyOn: aGame activatedBy: aShip [
+CardGeneratorEffect >> applyWith: anEffectManager activatedBy: aShip [
 
-	aGame giveCardToCurrentShip: aShip
+	anEffectManager giveCardToCurrentShip: aShip
 ]

@@ -14,13 +14,13 @@ EffectOnOneShip >> affectAShip: aShip [
 ]
 
 { #category : #applying }
-EffectOnOneShip >> applyOn: aGame activatedBy: aShip [
-
-	aGame applyEffectOnOneShip: self triggeredBy: aShip
-]
-
-{ #category : #applying }
 EffectOnOneShip >> applyReverseOn: aGame activatedBy: aShip [
 
 	aGame applyEffectOnAllShipsButOne: self triggerByShip: aShip
+]
+
+{ #category : #applying }
+EffectOnOneShip >> applyWith: anEffectManager activatedBy: aShip [
+
+	anEffectManager applyEffectOnOneShip: self triggeredBy: aShip
 ]
