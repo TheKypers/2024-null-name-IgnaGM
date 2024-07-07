@@ -153,7 +153,7 @@ Game >> playCard: aCard by: aShipName toTarget: aTarget [
 { #category : #modifying }
 Game >> playTurn [
 
-	| diceMovement cardMovment lastEffect |
+	| diceMovement cardMovment |
 	self canPlayNextTurnOf.
 
 	[ gameTurnHandler turnShipCanPlayTurn ]
@@ -163,20 +163,19 @@ Game >> playTurn [
 	diceMovement := dice throw.
 	cardMovment := gameCardHandler movementCardsActivated:
 		               theShipInCurrentTurn.
-
 	theShipInCurrentTurn moveTiles: diceMovement + cardMovment.
 
 	self adjustShipPosition: theShipInCurrentTurn.
 
-	lastEffect := gameBoard effectInPosition:
-		              theShipInCurrentTurn position.
+	gameEffectHandler lastEffectAppliedIs:
+		(gameBoard effectInPosition: theShipInCurrentTurn position).
 
-	gameEffectHandler lastEffectAppliedIs: lastEffect.
 	gameEffectHandler applyTileEffectTriggeredBy: theShipInCurrentTurn.
 
 	shipBattleHandler
 		checkShipBattle: theShipInCurrentTurn
 		withCardHandler: gameCardHandler.
+		
 	gameTurnHandler checkForShipsWithNoShield.
 	gameTurnHandler nextTurn.
 	theShipInCurrentTurn := gameTurnHandler currentTurnShip

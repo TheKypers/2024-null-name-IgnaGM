@@ -82,7 +82,7 @@ EffectManager >> lastEffectAppliedIs: anEffect [
 ]
 
 { #category : #initialization }
-EffectManager >> reversePolarityOfTile: aTileTarget [
+EffectManager >> reversePolarityOfEffectAt: aTileTarget [
 
 	board reversePolarityAt: aTileTarget objective
 ]
