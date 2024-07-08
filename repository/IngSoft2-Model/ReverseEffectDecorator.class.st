@@ -10,7 +10,7 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'class initialization' }
 ReverseEffectDecorator class >> withEffect: anEffect [
 
 	^ self new initializeWithEffect: anEffect

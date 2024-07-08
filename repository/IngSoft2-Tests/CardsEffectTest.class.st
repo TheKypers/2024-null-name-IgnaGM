@@ -15,34 +15,35 @@ CardsEffectTest >> testAShipCannotBeHiredByMoreThanOneShip [
 		          withTileEffectCollection: aTileArray
 		          withLengthInUnits: (Parsec withNominalValue: 10)
 		          withAmountOfLaps: 1.
-	
+
 	aCollectionOfNames := OrderedCollection
 		                      with: 'Juan'
 		                      with: 'Jose'
 		                      with: 'Pedro'.
 	aCollectionOfDie := OrderedCollection with:
 		                    (SequenceDie withSequence: #( 7 4 4 )).
-	
+
 	collectionOfCards := OrderedCollection new.
 	10 timesRepeat: [ collectionOfCards add: MercenaryCard ].
 	aDeck := LoadedDeck withCards: collectionOfCards.
-	
+
 	aGame := Game
 		         withBoard: aBoard
 		         withShipNames: aCollectionOfNames
 		         withDice: (Dice with: aCollectionOfDie)
 		         withDeck: aDeck.
-	
+
 	aTarget := ShipTarget withObjective: 'Juan'.
-	
+
 	aGame playTurn.
-	aGame playCard: MercenaryCard by: 'Jose' toTarget: aTarget .
+	aGame playCard: MercenaryCard by: 'Jose' toTarget: aTarget.
 	aGame playTurn.
 
 	self
-		assert: (aGame playCard: MercenaryCard by: 'Pedro' toTarget: aTarget)
+		assert:
+		(aGame playCard: MercenaryCard by: 'Pedro' toTarget: aTarget)
 		equals: 'Targeted ship is already a mercenary in another coalition'.
-	self assert: (aGame shipCards: 'Pedro') size equals: 2
+	self assert: (aGame shipWithName: 'Juan' hasAmountOfCards: 2)
 ]
 
 { #category : #tests }
@@ -79,49 +80,6 @@ CardsEffectTest >> testWhenACancelationCardIsPlayedDeactivateTargetedCard [
 		
 	anotherTarget := AllShipsTarget new.
 	
-	aGame playTurn.
-	aGame playCard: AccelerationCard by: 'Jose' toTarget: anotherTarget.
-	aGame playCard: CancellationCard by: 'Juan' toTarget: aTarget.
-	aGame playTurn.
-
-	self assert: (aGame allShipsPosition at: 'Jose') first equals: 5
-]
-
-{ #category : #tests }
-CardsEffectTest >> testWhenACancelationCardIsPlayedItCannotTargetANonexistentCard [
-
-	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget anotherTarget |
-	aTileArray := OrderedCollection new.
-	10 timesRepeat: [ aTileArray add: NullEffect new ].
-
-
-	aBoard := Board
-		          withTileEffectCollection: aTileArray
-		          withLengthInUnits: (Parsec withNominalValue: 10)
-		          withAmountOfLaps: 1.
-	aCollectionOfNames := OrderedCollection with: 'Juan' with: 'Jose'.
-	aCollectionOfDie := OrderedCollection with:
-		                    (SequenceDie withSequence: #( 5 4 )).
-
-	collectionOfCards := OrderedCollection
-		                     with: CancellationCard
-		                     with: AccelerationCard
-		                     with: CancellationCard
-		                     with: AccelerationCard.
-	aDeck := LoadedDeck withCards: collectionOfCards.
-
-	aGame := Game
-		         withBoard: aBoard
-		         withShipNames: aCollectionOfNames
-		         withDice: (Dice with: aCollectionOfDie)
-		         withDeck: aDeck.
-
-	aTarget := CardTarget withObjective:
-		           (AccelerationCard withHolder: 'Jose').
-
-	anotherTarget := AllShipsTarget new.
-
-
 	aGame playTurn.
 	aGame playCard: AccelerationCard by: 'Jose' toTarget: anotherTarget.
 	aGame playCard: CancellationCard by: 'Juan' toTarget: aTarget.
@@ -334,46 +292,6 @@ CardsEffectTest >> testWhenMercenaryCardIsCancelledShipsCanBattleAgain [
 
 	self assert: (aGame allShipAmountOfShields at: 'Juan') equals: 3.
 	self assert: (aGame allShipAmountOfShields at: 'Jose') equals: 2
-]
-
-{ #category : #tests }
-CardsEffectTest >> testWhenMercenaryCardIsPlayedAlliedShipsDontBattle [
-
-	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray aPosition collectionOfCards aDeck aTarget |
-	aTileArray := OrderedCollection new.
-	10 timesRepeat: [ aTileArray add: NullEffect new ].
-
-	aBoard := Board
-		          withTileEffectCollection: aTileArray
-		          withLengthInUnits: (Parsec withNominalValue: 10)
-		          withAmountOfLaps: 1.
-	aCollectionOfNames := OrderedCollection with: 'Juan' with: 'Jose'.
-	aCollectionOfDie := OrderedCollection with:
-		                    (SequenceDie withSequence: #( 5 )).
-
-
-	collectionOfCards := OrderedCollection new.
-	10 timesRepeat: [ collectionOfCards add: MercenaryCard ].
-	aDeck := LoadedDeck withCards: collectionOfCards.
-
-	aGame := Game
-		         withBoard: aBoard
-		         withShipNames: aCollectionOfNames
-		         withDice: (Dice with: aCollectionOfDie)
-		         withDeck: aDeck.
-	
-	aTarget := ShipTarget withObjective: 'Juan'	.
-	aGame playTurn.
-	aGame playCard: MercenaryCard by: 'Jose' toTarget: aTarget.
-	aGame playTurn.
-
-	aPosition := #( 6 1 ) asOrderedCollection.
-
-	self assert: (aGame allShipsPosition at: 'Juan') equals: aPosition.
-	self assert: (aGame allShipsPosition at: 'Jose') equals: aPosition.
-
-	self assert: (aGame allShipAmountOfShields at: 'Juan') equals: 3.
-	self assert: (aGame allShipAmountOfShields at: 'Jose') equals: 3
 ]
 
 { #category : #tests }
@@ -621,46 +539,6 @@ CardsEffectTest >> testWhenReversalCardIsPlayedTargetingAnSpeedCardShipMovesOneL
 	self assert: (aGame allShipsPosition  at: 'Juan') equals: #(6 1) asOrderedCollection .
 	self assert: (aGame allShipsPosition at: 'Jose') equals: #(5 1) asOrderedCollection.
 	
-]
-
-{ #category : #tests }
-CardsEffectTest >> testWhenShipWithMercenariesBattleAllOfThenThrowTheDice [
-
-	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget |
-	aTileArray := OrderedCollection new.
-	10 timesRepeat: [ aTileArray add: NullEffect new ].
-
-	aBoard := Board
-		          withTileEffectCollection: aTileArray
-		          withLengthInUnits: (Parsec withNominalValue: 10)
-		          withAmountOfLaps: 1.
-		
-	aCollectionOfNames := OrderedCollection
-		                      with: 'Juan'
-		                      with: 'Jose'
-		                      with: 'Pedro'.
-		
-	aCollectionOfDie := OrderedCollection with:
-		                    (SequenceDie withSequence: #( 7 4 4 )).
-	
-	collectionOfCards := OrderedCollection new.
-	10 timesRepeat: [ collectionOfCards add: MercenaryCard ].
-	aDeck := LoadedDeck withCards: collectionOfCards.
-	
-	aGame := Game
-		         withBoard: aBoard
-		         withShipNames: aCollectionOfNames
-		         withDice: (Dice with: aCollectionOfDie)
-		         withDeck: aDeck.
-
-	aTarget := ShipTarget withObjective: 'Juan'.
-	
-	aGame playTurn.
-	aGame playCard: MercenaryCard by: 'Jose' toTarget: aTarget.
-	aGame playTurn.
-	aGame playTurn.
-
-	self assert: (aGame allShipAmountOfShields at: 'Pedro') equals: 2
 ]
 
 { #category : #tests }

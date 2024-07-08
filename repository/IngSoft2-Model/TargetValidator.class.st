@@ -13,12 +13,12 @@ Class {
 }
 
 { #category : #'as yet unclassified' }
-TargetValidator class >> with: aBoard and: aCollectionOfShips and: aCardHandler [
+TargetValidator class >> withBoard: aBoard withShips: aCollectionOfShips andCardHandler: aCardHandler [
 
 	^ self new
-		  initalizeWith: aBoard
-		  and: aCollectionOfShips
-		  and: aCardHandler
+		  withBoard: aBoard
+		  withShips: aCollectionOfShips
+		  andCardHandler: aCardHandler
 ]
 
 { #category : #validations }
@@ -26,14 +26,6 @@ TargetValidator >> cardIsValid: aCardTarget [
 
 	(cardHandler checkTarget: aCardTarget) ifFalse: [
 		Error signal: 'Targeted ship is not valid' ]
-]
-
-{ #category : #initialization }
-TargetValidator >> initalizeWith: aBoard and: aCollectionOfShips and: aCardHandler [
-
-	board := aBoard.
-	ships := aCollectionOfShips.
-	cardHandler := aCardHandler
 ]
 
 { #category : #validations }
@@ -56,4 +48,12 @@ TargetValidator >> tileTargetIsValid: aTileTarget [
 		Error signal: 'Targeted tile is out of bounds' ].
 
 	^ true
+]
+
+{ #category : #initialization }
+TargetValidator >> withBoard: aBoard withShips: aCollectionOfShips andCardHandler: aCardHandler [
+
+	board := aBoard.
+	ships := aCollectionOfShips.
+	cardHandler := aCardHandler
 ]

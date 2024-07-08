@@ -12,7 +12,7 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #events }
+{ #category : #'class initialization' }
 ShipBattle class >> withDice: aCollectionOfDice withShips: aCollectionOfShips [
 
 	^ self new

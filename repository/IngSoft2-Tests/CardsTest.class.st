@@ -15,7 +15,7 @@ CardsTest >> should: anErrorBlock raise: exceptionClass withMessage: anErrorMess
 ]
 
 { #category : #tests }
-CardsTest >> testTotalSumOfCardsProbabilitiesIs100 [
+CardsTest >> testTotalSumOfCardsProbabilitiesAre100 [
 
 	| aBoard aCollectionOfNames aCollectionOfDie aTileArray aDeck |
 	aTileArray := OrderedCollection new.

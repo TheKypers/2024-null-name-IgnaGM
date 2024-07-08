@@ -122,7 +122,7 @@ Game >> initializeGameWith: aBoard withShipNames: aNameCollection withDice: aDic
 
 	gameCardHandler := CardHandler withDeck: aDeck andEffectHandler: gameEffectHandler.
 	
-	targetValidator := TargetValidator with: gameBoard and: gameShips and:  gameCardHandler.
+	targetValidator := TargetValidator withBoard: gameBoard withShips: gameShips andCardHandler:  gameCardHandler.
 
 	theShipInCurrentTurn := gameTurnHandler currentTurnShip.
 	gameShips do: [ :ship | gameCardHandler startingCards: ship shipName ]
@@ -186,12 +186,6 @@ Game >> playTurn [
 ]
 
 { #category : #accessing }
-Game >> shipCards: aShip [
-
-	^ gameCardHandler inPlayDeck select: [ :card | card holder = aShip ]
-]
-
-{ #category : #accessing }
 Game >> shipRankings [
 
 	| sortedShips rankDictionary |
@@ -203,6 +197,14 @@ Game >> shipRankings [
 		rankDictionary at: indice put: elemento ].
 
 	^ rankDictionary
+]
+
+{ #category : #accessing }
+Game >> shipWithName: aShipName hasAmountOfCards: anAmountOfCards [
+
+	^ gameCardHandler
+		  shipWithName: aShipName
+		  hasAmountOfCards: anAmountOfCards
 ]
 
 { #category : #modifying }

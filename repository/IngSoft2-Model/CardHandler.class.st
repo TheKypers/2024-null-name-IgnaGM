@@ -79,12 +79,6 @@ CardHandler >> giveCardTo: aShipName [
 	inPlayDeck add: (gameDeck cardAtRandom withHolder: aShipName)
 ]
 
-{ #category : #accessing }
-CardHandler >> inPlayDeck [
-
-	^ inPlayDeck
-]
-
 { #category : #initialization }
 CardHandler >> initalizeWithDeck: aDeck andAEffectHandler: anEffectHandler [
 
@@ -140,16 +134,23 @@ CardHandler >> reverseCard: aCard [
 		reverseCardEffectWith: self
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #modifying }
 CardHandler >> reverseCoalition: aCoalition [
 
 	coalitionHandler modifyReverseCoalitions: aCoalition
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #modifying }
 CardHandler >> reverseEffectPolarity: aPositionTarget [
 
 	effectHandler reversePolarityOfEffectAt: aPositionTarget
+]
+
+{ #category : #comparing }
+CardHandler >> shipWithName: aShipName hasAmountOfCards: anAmountOfCards [
+
+	^ (inPlayDeck select: [ :card | card holder = aShipName ]) size
+	  = anAmountOfCards
 ]
 
 { #category : #generating }

@@ -13,7 +13,7 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'class initialization' }
 EffectManager class >> withBoard: aBoard andShips: aCollectionOfShips andGame: aGame [
 
 	^ self new
