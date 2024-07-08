@@ -12,7 +12,7 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'class initialization' }
 TargetValidator class >> withBoard: aBoard withShips: aCollectionOfShips andCardHandler: aCardHandler [
 
 	^ self new
