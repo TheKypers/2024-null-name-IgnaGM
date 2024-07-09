@@ -10,7 +10,8 @@ Class {
 		'inPlayDeck',
 		'gameDeck',
 		'coalitionHandler',
-		'effectHandler'
+		'effectHandler',
+		'amountOfStartingCards'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -87,7 +88,8 @@ CardHandler >> initalizeWithDeck: aDeck andAEffectHandler: anEffectHandler [
 	activeCards := OrderedCollection new.
 	lastCardPlayed := NullCard new.
 	effectHandler := anEffectHandler.
-	coalitionHandler := CoalitionHandler new
+	coalitionHandler := CoalitionHandler new.
+	amountOfStartingCards := 2.
 ]
 
 { #category : #accessing }
@@ -156,7 +158,7 @@ CardHandler >> shipWithName: aShipName hasAmountOfCards: anAmountOfCards [
 { #category : #generating }
 CardHandler >> startingCards: aShipName [
 
-	2 timesRepeat: [ self giveCardTo: aShipName ]
+	amountOfStartingCards timesRepeat: [ self giveCardTo: aShipName ]
 ]
 
 { #category : #comparing }
