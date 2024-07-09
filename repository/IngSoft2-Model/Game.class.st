@@ -142,15 +142,12 @@ Game >> playCard: aCard by: aShipName toTarget: aTarget [
 
 	gameCardHandler validateCard: aCardToPlay.
 	targetValidator targetIsValid: aTarget.
-	
+
 	(aCardToPlay canPlayRightNow: theShipInCurrentTurn) ifFalse: [
 		CardExeption signal:
 			'Ship cannot throw this card as its not his turn' ].
 
-	[ gameCardHandler activateCard: aCardToPlay ]
-		on: CardExeption
-		do: [ :ex | ^ ex messageText ].
-		
+	gameCardHandler activateCard: aCardToPlay.
 	gameCardHandler removeCardFromShipDeck: aCardToPlay
 ]
 

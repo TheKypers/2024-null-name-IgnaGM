@@ -40,9 +40,11 @@ CardsEffectTest >> testAShipCannotBeHiredByMoreThanOneShip [
 	aGame playTurn.
 
 	self
-		assert:
-		(aGame playCard: MercenaryCard by: 'Pedro' toTarget: aTarget)
-		equals: 'Targeted ship is already a mercenary in another coalition'.
+		should: [
+		aGame playCard: MercenaryCard by: 'Pedro' toTarget: aTarget ]
+		raise: CardExeption
+		withMessage:
+		'Targeted ship is already a mercenary in another coalition'.
 	self assert: (aGame shipWithName: 'Juan' hasAmountOfCards: 2)
 ]
 
