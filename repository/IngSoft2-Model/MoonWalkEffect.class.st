@@ -26,11 +26,17 @@ MoonWalkEffect class >> withMoonwalkDistance: aDistance [
 ]
 
 { #category : #applying }
-MoonWalkEffect >> affectAllShips: aShipCollection but: currentTurnShip [
+MoonWalkEffect >> affectAShip: aShip [
+
+	aShip moveTiles: moonWalkDistance negated
+]
+
+{ #category : #applying }
+MoonWalkEffect >> affectAllShips: aShipCollection but: aShip [
 
 	aShipCollection
-		reject: [ :aShip | aShip = currentTurnShip ]
-		thenCollect: [ :aShip | aShip moveTiles: moonWalkDistance negated ]
+		reject: [ :ship | ship = aShip ]
+		thenCollect: [ :ship | ship moveTiles: moonWalkDistance negated ]
 ]
 
 { #category : #generators }

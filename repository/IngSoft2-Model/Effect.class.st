@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #applying }
+Effect >> applyReverseOn: anEffectManager activatedBy: aShip [
+
+	self subclassResponsibility
+]
+
+{ #category : #applying }
 Effect >> applyWith: anEffectManager activatedBy: aShip [
 
 	self subclassResponsibility

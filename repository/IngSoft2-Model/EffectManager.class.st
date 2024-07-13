@@ -63,6 +63,12 @@ EffectManager >> applyTileEffectTriggeredBy: aShip [
 	board applyTileEffectWith: self triggeredBy: aShip
 ]
 
+{ #category : #'as yet unclassified' }
+EffectManager >> giveCardToAllShipsBut: aShip [
+
+	game giveCardToAllShipsBut: aShip
+]
+
 { #category : #initialization }
 EffectManager >> giveCardToCurrentShip: aShip [
 

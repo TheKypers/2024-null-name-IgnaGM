@@ -8,9 +8,21 @@ Class {
 }
 
 { #category : #applying }
+EffectOnAllShipsButOne >> affectAShip: aShip [
+
+	self subclassResponsibility
+]
+
+{ #category : #applying }
 EffectOnAllShipsButOne >> affectAllShips: aCollection but: aShip [
 
 	^ self subclassResponsibility
+]
+
+{ #category : #applying }
+EffectOnAllShipsButOne >> applyReverseOn: anEffectManager activatedBy: aShip [
+
+	anEffectManager applyEffectOnOneShip: self triggeredBy: aShip
 ]
 
 { #category : #applying }

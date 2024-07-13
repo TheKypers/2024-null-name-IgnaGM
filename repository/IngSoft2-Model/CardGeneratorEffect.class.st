@@ -8,6 +8,12 @@ Class {
 }
 
 { #category : #applying }
+CardGeneratorEffect >> applyReverseOn: anEffectManager activatedBy: aShip [
+
+	anEffectManager giveCardToAllShipsBut: aShip
+]
+
+{ #category : #applying }
 CardGeneratorEffect >> applyWith: anEffectManager activatedBy: aShip [
 
 	anEffectManager giveCardToCurrentShip: aShip

@@ -44,7 +44,7 @@ ShipCoalition >> initializeWithLeader: aLeader andMercenary: aMercenary [
 	isReversed := false
 ]
 
-{ #category : #testing }
+{ #category : #accessing }
 ShipCoalition >> isReversed [
 
 	^ isReversed
@@ -56,7 +56,7 @@ ShipCoalition >> mercenary [
 	^ mercenary
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #modifying }
 ShipCoalition >> reverseCoaltion [
 
 	isReversed := isReversed not

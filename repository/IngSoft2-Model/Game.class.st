@@ -99,7 +99,15 @@ Game >> canPlayNextTurnOf [
 		Error signal: 'Game is Over you cant Keep Playing' ].
 ]
 
-{ #category : #validating }
+{ #category : #modifying }
+Game >> giveCardToAllShipsBut: aShip [
+
+	gameShips
+		reject: [ :ship | ship = aShip ]
+		thenCollect: [ :ship | gameCardHandler giveCardTo: ship shipName ].
+]
+
+{ #category : #modifying }
 Game >> giveCardToCurrentShip: aShip [
 
 	gameCardHandler giveCardTo: aShip shipName
