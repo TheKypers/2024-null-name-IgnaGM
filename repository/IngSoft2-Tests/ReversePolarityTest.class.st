@@ -133,7 +133,8 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAWormholeEffe
 	aTileArray := OrderedCollection new.
 	10 timesRepeat: [ aTileArray add: NullEffect new ].
 
-	aTileArray at: 6 put: (WormholeEffect fromPosition: 2 toPosition: 4).
+	aTileArray at: 6 put: (WormholeEffect fromPosition: 6 toPosition: 4).
+	aTileArray at: 4 put: (WormholeEffect fromPosition: 4 toPosition: 6).
 
 	aBoard := Board
 		          withTileEffectCollection: aTileArray
