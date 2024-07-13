@@ -5,7 +5,7 @@ Class {
 }
 
 { #category : #tests }
-ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingABlackHoleEffectTheEffectTargetIsReversed [
+ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingABlackHoleEffectTheTargetAffectedIsReversed [
 
 	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget |
 	aTileArray := OrderedCollection new.
@@ -47,7 +47,7 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingABlackHoleEff
 ]
 
 { #category : #tests }
-ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingACardGeneratorEffectTheTargetIsReversed [
+ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingACardGeneratorEffectTargetAffectedIsReversed [
 
 	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget |
 	aTileArray := OrderedCollection new.
@@ -85,7 +85,7 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingACardGenerato
 ]
 
 { #category : #tests }
-ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAMoonWalkEffectTheTargetIsReversed [
+ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAMoonWalkEffectTheTargetAffectedIsReversed [
 
 	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget |
 	aTileArray := OrderedCollection new.
@@ -127,7 +127,49 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAMoonWalkEffe
 ]
 
 { #category : #tests }
-ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAnAtomicBombEffectTheTargetIsReversed [
+ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAnAtomicBombEffectTheTargetAffectedIsReversed [
+
+	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget |
+	aTileArray := OrderedCollection new.
+	10 timesRepeat: [ aTileArray add: NullEffect new ].
+
+	aTileArray at: 6 put: AtomicBombEffect new.
+
+	aBoard := Board
+		          withTileEffectCollection: aTileArray
+		          withLengthInUnits: (Parsec withNominalValue: 10)
+		          withAmountOfLaps: 1.
+	aCollectionOfNames := OrderedCollection with: 'Juan' with: 'Jose'.
+	aCollectionOfDie := OrderedCollection with:
+		                    (SequenceDie withSequence: #( 8 5 )).
+
+	collectionOfCards := OrderedCollection new.
+	1 timesRepeat: [ collectionOfCards add: ReversePolarityCard ].
+
+	aDeck := LoadedDeck withCards: collectionOfCards.
+
+	aGame := Game
+		         withBoard: aBoard
+		         withShipNames: aCollectionOfNames
+		         withDice: (Dice with: aCollectionOfDie)
+		         withDeck: aDeck.
+
+	aTarget := TileTarget withObjective: 6.
+
+	aGame playCard: ReversePolarityCard by: 'Juan' toTarget: aTarget.
+	aGame playTurn.
+	aGame playTurn.
+
+	self
+		assert: (aGame allShipsPosition at: 'Juan')
+		equals: #( 9 1 ) asOrderedCollection.
+	self
+		assert: (aGame allShipsPosition at: 'Jose')
+		equals: #( 6 1 ) asOrderedCollection
+]
+
+{ #category : #tests }
+ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAnNullEffectTheTargetAffectedIsNull [
 
 	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget |
 	aTileArray := OrderedCollection new.
