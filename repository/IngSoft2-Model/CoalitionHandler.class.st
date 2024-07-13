@@ -5,8 +5,7 @@ Class {
 	#name : #CoalitionHandler,
 	#superclass : #Object,
 	#instVars : [
-		'reverseCoalitions',
-		'normalCoalitions'
+		'coalitions'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -16,14 +15,15 @@ CoalitionHandler >> addToCoalitions: aCoalition [
 
 	self verifyCoalition: aCoalition mercenary.
 
-	normalCoalitions add: aCoalition
+	coalitions add: aCoalition
 ]
 
 { #category : #comparing }
 CoalitionHandler >> alliesWithEnemy: aEnemyShip [
 
-	^ (reverseCoalitions select: [ :coalition |
-		   coalition hasLeader: aEnemyShip shipName ]) collect: [ :coalition |
+	^ (coalitions  select: [ :coalition |
+		   (coalition hasLeader: aEnemyShip shipName) and:
+			   coalition isReversed ]) collect: [ :coalition |
 		  coalition mercenary ]
 ]
 
@@ -44,46 +44,57 @@ CoalitionHandler >> armyOf: aShip withEnemy: aEnemyShip [
 { #category : #initialization }
 CoalitionHandler >> initialize [
 
-	normalCoalitions := OrderedCollection new.
-	reverseCoalitions := OrderedCollection new
+	coalitions := OrderedCollection new.
 ]
 
 { #category : #comparing }
 CoalitionHandler >> mercenariesOfShips: aShip [
 
 	| mercenaryCollection |
-	mercenaryCollection := (normalCoalitions select: [ :coalition |
+	mercenaryCollection := (coalitions select: [ :coalition |
 		                        (coalition hasLeader: aShip shipName) and:
-			                        (reverseCoalitions includes: coalition) not ])
-		                       collect: [ :coalition | coalition mercenary ].
+			                        coalition isReversed not ]) collect: [
+		                       :coalition | coalition mercenary ].
 
 	mercenaryCollection add: aShip shipName.
 	^ mercenaryCollection
 ]
 
 { #category : #comparing }
-CoalitionHandler >> modifyReverseCoalitions: aCoalition [
+CoalitionHandler >> modifyReverseCoalitionsWith: aLeader andMercenary: aMercenary [
 
-	(reverseCoalitions includes: aCoalition)
-		ifFalse: [
-			reverseCoalitions add: aCoalition.
-			normalCoalitions remove: aCoalition ]
+	| aNormalCoalition aReversedCoalition |
+	aNormalCoalition := NormalShipCoalition
+		                    withLeader: aLeader
+		                    andMercenary: aMercenary.
+
+	aReversedCoalition := ReversedShipCoalition
+		                      withLeader: aLeader
+		                      andMercenary: aMercenary.
+
+	(coalitions includes: aNormalCoalition)
 		ifTrue: [
-			reverseCoalitions remove: aCoalition.
-			normalCoalitions add: aCoalition ]
+			coalitions remove: aNormalCoalition.
+			coalitions add: aReversedCoalition ]
+		ifFalse: [
+			coalitions add: aNormalCoalition.
+			coalitions remove: aReversedCoalition ]
 ]
 
 { #category : #comparing }
-CoalitionHandler >> removeCoalition: aCoalition [
-	
-	normalCoalitions removeAllSuchThat: [ :coalition | coalition = aCoalition ].
-	reverseCoalitions removeAllSuchThat: [ :coalition | coalition = aCoalition ]
+CoalitionHandler >> removeCoalitionOf: aLeader and: aMercenary [
+
+	coalitions removeAllSuchThat: [ :coalition |
+		coalition hasSameMembersAs:
+			(ShipCoalition
+				 withLeader: aLeader
+				 andMercenary: aMercenary objective) ]
 ]
 
 { #category : #comparing }
 CoalitionHandler >> verifyCoalition: mercenaryShip [
 
-	(normalCoalitions anySatisfy: [ :coalition |
+	(coalitions anySatisfy: [ :coalition |
 		 coalition mercenary = mercenaryShip ]) ifTrue: [
 		CardExeption signal:
 			'Targeted ship is already a mercenary in another coalition' ]

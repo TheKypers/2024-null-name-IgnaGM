@@ -30,9 +30,16 @@ ShipCoalition >> hasLeader: aShipName [
 ]
 
 { #category : #comparing }
+ShipCoalition >> hasSameMembersAs: anotherCoalition [
+
+	^ self mercenary = anotherCoalition mercenary and:
+		  (anotherCoalition hasLeader: leader)
+]
+
+{ #category : #comparing }
 ShipCoalition >> hash [
 
-	^ leader hash + mercenary hash
+	^ leader hash + mercenary hash + self class hash
 ]
 
 { #category : #initialization }

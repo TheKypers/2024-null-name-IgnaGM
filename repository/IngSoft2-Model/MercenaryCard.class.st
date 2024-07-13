@@ -11,7 +11,9 @@ Class {
 MercenaryCard >> activateWith: aCardHandler [
 
 	aCardHandler addCoalition:
-		(ShipCoalition withLeader: holder andMercenary: target objective).
+		(NormalShipCoalition
+			 withLeader: holder
+			 andMercenary: target objective).
 	aCardHandler addToActiveCards: self.
 	aCardHandler changeLastCardTo: self
 ]
@@ -31,6 +33,5 @@ MercenaryCard >> deactivate: aCardHandler [
 { #category : #event }
 MercenaryCard >> reverseCardEffectWith: anCardHandler [
 
-	anCardHandler reverseCoalition:
-		(ShipCoalition withLeader: holder andMercenary: target objective)
+	anCardHandler reverseCoalition: holder andMercenary: target objective
 ]
