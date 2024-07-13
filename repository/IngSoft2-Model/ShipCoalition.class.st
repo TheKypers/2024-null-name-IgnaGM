@@ -6,7 +6,8 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'leader',
-		'mercenary'
+		'mercenary',
+		'isReversed'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -30,16 +31,9 @@ ShipCoalition >> hasLeader: aShipName [
 ]
 
 { #category : #comparing }
-ShipCoalition >> hasSameMembersAs: anotherCoalition [
-
-	^ self mercenary = anotherCoalition mercenary and:
-		  (anotherCoalition hasLeader: leader)
-]
-
-{ #category : #comparing }
 ShipCoalition >> hash [
 
-	^ leader hash + mercenary hash + self class hash
+	^ leader hash + mercenary hash
 ]
 
 { #category : #initialization }
@@ -47,10 +41,23 @@ ShipCoalition >> initializeWithLeader: aLeader andMercenary: aMercenary [
 
 	leader := aLeader.
 	mercenary := aMercenary.
+	isReversed := false
+]
+
+{ #category : #testing }
+ShipCoalition >> isReversed [
+
+	^ isReversed
 ]
 
 { #category : #accessing }
 ShipCoalition >> mercenary [
 
 	^ mercenary
+]
+
+{ #category : #'as yet unclassified' }
+ShipCoalition >> reverseCoaltion [
+
+	isReversed := isReversed not
 ]

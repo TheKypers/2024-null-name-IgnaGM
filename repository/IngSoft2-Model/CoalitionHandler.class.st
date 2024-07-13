@@ -30,13 +30,12 @@ CoalitionHandler >> alliesWithEnemy: aEnemyShip [
 { #category : #comparing }
 CoalitionHandler >> armyOf: aShip withEnemy: aEnemyShip [
 
-	| mercenaryCollection rougeMercenaryCollection combinedSet armyCollection |
-	mercenaryCollection := self mercenariesOfShips: aShip.
-	rougeMercenaryCollection := self alliesWithEnemy: aEnemyShip.
+	| mercenariesCollections reversedMercenariesCollections armyCollection |
+	mercenariesCollections := self mercenariesOfShips: aShip.
+	reversedMercenariesCollections := self alliesWithEnemy: aEnemyShip.
 
-	combinedSet := mercenaryCollection asSet union:
-		               rougeMercenaryCollection asSet.
-	armyCollection := OrderedCollection withAll: combinedSet asArray.
+	armyCollection := mercenariesCollections union:
+		                  reversedMercenariesCollections.
 
 	^ armyCollection
 ]
@@ -63,32 +62,24 @@ CoalitionHandler >> mercenariesOfShips: aShip [
 { #category : #comparing }
 CoalitionHandler >> modifyReverseCoalitionsWith: aLeader andMercenary: aMercenary [
 
-	| aNormalCoalition aReversedCoalition |
-	aNormalCoalition := NormalShipCoalition
-		                    withLeader: aLeader
-		                    andMercenary: aMercenary.
+	| aShipCoalition |
+	aShipCoalition := ShipCoalition
+		                  withLeader: aLeader
+		                  andMercenary: aMercenary.
 
-	aReversedCoalition := ReversedShipCoalition
-		                      withLeader: aLeader
-		                      andMercenary: aMercenary.
-
-	(coalitions includes: aNormalCoalition)
-		ifTrue: [
-			coalitions remove: aNormalCoalition.
-			coalitions add: aReversedCoalition ]
-		ifFalse: [
-			coalitions add: aNormalCoalition.
-			coalitions remove: aReversedCoalition ]
+	(coalitions detect: [ :coalition | coalition = aShipCoalition ])
+		reverseCoaltion
 ]
 
 { #category : #comparing }
 CoalitionHandler >> removeCoalitionOf: aLeader and: aMercenary [
 
 	coalitions removeAllSuchThat: [ :coalition |
-		coalition hasSameMembersAs:
-			(ShipCoalition
-				 withLeader: aLeader
-				 andMercenary: aMercenary objective) ]
+		coalition
+		=
+		(ShipCoalition
+			 withLeader: aLeader
+			 andMercenary: aMercenary objective) ]
 ]
 
 { #category : #comparing }

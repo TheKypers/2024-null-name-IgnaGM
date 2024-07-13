@@ -11,9 +11,7 @@ Class {
 MercenaryCard >> activateWith: aCardHandler [
 
 	aCardHandler addCoalition:
-		(NormalShipCoalition
-			 withLeader: holder
-			 andMercenary: target objective).
+		(ShipCoalition withLeader: holder andMercenary: target objective).
 	aCardHandler addToActiveCards: self.
 	aCardHandler changeLastCardTo: self
 ]
