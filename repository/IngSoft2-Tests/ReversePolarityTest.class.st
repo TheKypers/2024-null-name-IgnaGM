@@ -175,8 +175,6 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAnNullEffectT
 	aTileArray := OrderedCollection new.
 	10 timesRepeat: [ aTileArray add: NullEffect new ].
 
-	aTileArray at: 6 put: AtomicBombEffect new.
-
 	aBoard := Board
 		          withTileEffectCollection: aTileArray
 		          withLengthInUnits: (Parsec withNominalValue: 10)
