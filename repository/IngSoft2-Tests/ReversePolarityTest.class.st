@@ -127,6 +127,48 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAMoonWalkEffe
 ]
 
 { #category : #tests }
+ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAWormholeEffectTheTargetAffectedIsReversed [
+
+	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget |
+	aTileArray := OrderedCollection new.
+	10 timesRepeat: [ aTileArray add: NullEffect new ].
+
+	aTileArray at: 6 put: (WormholeEffect fromPosition: 2 toPosition: 4).
+
+	aBoard := Board
+		          withTileEffectCollection: aTileArray
+		          withLengthInUnits: (Parsec withNominalValue: 10)
+		          withAmountOfLaps: 1.
+	aCollectionOfNames := OrderedCollection with: 'Juan' with: 'Jose'.
+	aCollectionOfDie := OrderedCollection with:
+		                    (SequenceDie withSequence: #( 8 5 )).
+
+	collectionOfCards := OrderedCollection new.
+	1 timesRepeat: [ collectionOfCards add: ReversePolarityCard ].
+
+	aDeck := LoadedDeck withCards: collectionOfCards.
+
+	aGame := Game
+		         withBoard: aBoard
+		         withShipNames: aCollectionOfNames
+		         withDice: (Dice with: aCollectionOfDie)
+		         withDeck: aDeck.
+
+	aTarget := TileTarget withObjective: 6.
+
+	aGame playCard: ReversePolarityCard by: 'Juan' toTarget: aTarget.
+	aGame playTurn.
+	aGame playTurn.
+
+	self
+		assert: (aGame allShipsPosition at: 'Juan')
+		equals: #( 1 1 ) asOrderedCollection.
+	self
+		assert: (aGame allShipsPosition at: 'Jose')
+		equals: #( 6 1 ) asOrderedCollection
+]
+
+{ #category : #tests }
 ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAnAtomicBombEffectTheTargetAffectedIsReversed [
 
 	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget |

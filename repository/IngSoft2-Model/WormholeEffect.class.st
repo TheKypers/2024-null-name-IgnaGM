@@ -25,6 +25,14 @@ WormholeEffect >> affectAShip: aShip [
 	aShip moveTiles: wormholeDistance
 ]
 
+{ #category : #applying }
+WormholeEffect >> affectAllShips: aShipCollection but: currentTurnShip [
+
+	aShipCollection
+		reject: [ :aShip | aShip = currentTurnShip ]
+		thenCollect: [ :aShip | aShip moveToFirstTile ]
+]
+
 { #category : #initialization }
 WormholeEffect >> initializeInPosition: firstPosition toPosition: lastPosition [
 
