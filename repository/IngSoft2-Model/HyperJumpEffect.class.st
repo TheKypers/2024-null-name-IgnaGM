@@ -5,9 +5,9 @@ Class {
 	#name : #HyperJumpEffect,
 	#superclass : #EffectOnOneShip,
 	#instVars : [
-		'parsecCollection',
-		'parsecNumber',
-		'boardParsecToTileRatio'
+		'boardParsecToTileRatio',
+		'currentHyperJump',
+		'hyperJumpArray'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -25,8 +25,8 @@ HyperJumpEffect class >> withParsecArray: aParsecArray andLengthInTiles: lengthI
 HyperJumpEffect >> affectAShip: aShip [
 
 	aShip moveTiles:
-		((parsecCollection at: self currentParsec) toUnit: Parsec)
-			nominalValue asInteger * boardParsecToTileRatio
+		(self currentParsec toUnit: Parsec) nominalValue asInteger
+		* boardParsecToTileRatio
 ]
 
 { #category : #applying }
@@ -36,8 +36,8 @@ HyperJumpEffect >> affectAllShips: aShipCollection but: triggeringShip [
 		reject: [ :aShip | aShip = triggeringShip ]
 		thenCollect: [ :aShip |
 			| aHypeJumpDistance |
-			aHypeJumpDistance := ((parsecCollection at: self currentParsec)
-				                      toUnit: Parsec) nominalValue asInteger
+			aHypeJumpDistance := (self currentParsec toUnit: Parsec)
+				                     nominalValue asInteger
 			                     * boardParsecToTileRatio.
 			aShip moveTiles: aHypeJumpDistance ]
 ]
@@ -45,10 +45,16 @@ HyperJumpEffect >> affectAllShips: aShipCollection but: triggeringShip [
 { #category : #modifying }
 HyperJumpEffect >> currentParsec [
 
-	parsecNumber := parsecNumber < parsecCollection size
-		                ifTrue: [ parsecNumber + 1 ]
-		                ifFalse: [ 1 ].
-	^ parsecNumber
+	| currentParsecNumber |
+	currentParsecNumber := hyperJumpArray indexOf: currentHyperJump.
+
+	currentHyperJump := currentParsecNumber < hyperJumpArray size
+		                    ifTrue: [
+		                    hyperJumpArray at: currentParsecNumber + 1 ]
+		                    ifFalse: [ hyperJumpArray at: 1 ].
+
+
+	^ currentHyperJump
 ]
 
 { #category : #generators }
@@ -60,8 +66,8 @@ HyperJumpEffect >> generateParameters: aTileEffectCreator [
 { #category : #initialization }
 HyperJumpEffect >> initializeWithParsecArray: aParsecArray andLengthInTiles: lengthInTiles andLengthInParsecs: lengthInParsecs [
 
-	parsecCollection := aParsecArray asSortedCollection: [ :a :b | a > b ].
+	hyperJumpArray := aParsecArray asSortedCollection: [ :a :b | a > b ].
 
 	boardParsecToTileRatio := lengthInTiles // lengthInParsecs.
-	parsecNumber := 0
+	currentHyperJump := Parsec withNominalValue: 0
 ]

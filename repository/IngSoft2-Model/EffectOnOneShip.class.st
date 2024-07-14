@@ -8,18 +8,6 @@ Class {
 }
 
 { #category : #applying }
-EffectOnOneShip >> affectAShip: aShip [
-
-	^ self subclassResponsibility
-]
-
-{ #category : #applying }
-EffectOnOneShip >> affectAllShips: aShipCollection but: currentTurnShip [
-
-	^ self subclassResponsibility
-]
-
-{ #category : #applying }
 EffectOnOneShip >> applyReverseOn: aGame activatedBy: aShip [
 
 	aGame applyEffectOnAllShipsButOne: self triggerByShip: aShip

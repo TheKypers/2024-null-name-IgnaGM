@@ -3,7 +3,7 @@ a
 "
 Class {
 	#name : #CardGeneratorEffect,
-	#superclass : #Effect,
+	#superclass : #EffectOnOneShip,
 	#category : #'IngSoft2-Model'
 }
 
