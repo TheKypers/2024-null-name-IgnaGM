@@ -16,7 +16,7 @@ BoardProbabilityTest >> testTotalSumOfEffectsProbabilitiesIs100 [
 		should: [
 			TileEffectsCreator createWithProbabilityDistribution:
 				aProbabilityDistributionCollection ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage:
 		'Total efffect probabilities cannot be diferent from 100%'
 ]

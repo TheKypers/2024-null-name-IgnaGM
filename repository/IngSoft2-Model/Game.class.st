@@ -25,11 +25,11 @@ Class {
 Game class >> isValid: aBoard with: aNameCollection and: aDice [
 
 	aNameCollection isEmpty ifTrue: [
-		Error signal: 'Game cannot be created without any Ship names' ].
+		InvalidArgumentExeption signal: 'Game cannot be created without any Ship names' ].
 	(aBoard respondsTo: #numbOfTiles) ifFalse: [
-		Error signal: 'Game cannot be started without a board' ].
+		InvalidArgumentExeption signal: 'Game cannot be started without a board' ].
 	(aDice respondsTo: #throw) ifFalse: [
-		Error signal: 'Game cannot be started without at least one die' ]
+		InvalidArgumentExeption signal: 'Game cannot be started without at least one die' ]
 ]
 
 { #category : #'class initialization' }

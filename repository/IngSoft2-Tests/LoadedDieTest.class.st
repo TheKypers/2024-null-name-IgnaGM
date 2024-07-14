@@ -39,7 +39,7 @@ LoadedDieTest >> testDieCannotBeCreatedWithLessThanThreeFaces [
 
 	self
 		should: [ LoadedDie of: 2 ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'Faces should be more than 2'
 ]
 

@@ -20,7 +20,7 @@ Deck class >> probabilityDistributionIsValid: aProbabilityDistributionCollection
 	aProbabilityDistributionCollection do: [ :effectProbability |
 		sum := sum + effectProbability probability ].
 	sum = 100 ifFalse: [
-		Error signal:
+		InvalidArgumentExeption signal:
 			'Total card probabilities cannot be diferent from 100%' ]
 ]
 

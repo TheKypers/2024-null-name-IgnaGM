@@ -14,7 +14,7 @@ Class {
 Die class >> isValid: anAmountOfFaces [
 
 	anAmountOfFaces < 3 ifTrue: [
-		Error signal: 'Faces should be more than 2' ]
+		InvalidArgumentExeption signal: 'Faces should be more than 2' ]
 ]
 
 { #category : #testing }

@@ -14,7 +14,7 @@ Class {
 Dice class >> isValid: aDieCollection [
 
 	aDieCollection isEmpty ifTrue: [
-		Error signal: 'There should be at least 1 Die' ]
+		InvalidArgumentExeption signal: 'There should be at least 1 Die' ]
 ]
 
 { #category : #'instance creation' }

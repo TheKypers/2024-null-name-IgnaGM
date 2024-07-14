@@ -30,7 +30,7 @@ DieTest >> testDiceRequiresAtLeastOneDie [
 
 	self
 		should: [ Dice with: OrderedCollection new ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'There should be at least 1 Die'
 ]
 
@@ -58,7 +58,7 @@ DieTest >> testDieCannotBeCreatedWithLessThanThreeFaces [
 
 	self
 		should: [ Die of: 2 ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'Faces should be more than 2'
 ]
 

@@ -88,6 +88,6 @@ BoardTest >> testWormHoleTilePairsCannotOverlap [
 				withWormHolePair: aWormHolePair
 				withHyperJumpArray: #( 1 1 1 )
 				withAmountOfLaps: 1 ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'Wormhole tiles cannot be in the same position'
 ]

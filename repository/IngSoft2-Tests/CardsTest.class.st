@@ -36,7 +36,7 @@ CardsTest >> testTotalSumOfCardsProbabilitiesAre100 [
 				         (OrderedCollection with: (ProbabilityAssociation
 						           associate: CancellationCard
 						           withProbability: 50)) ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage:
 		'Total card probabilities cannot be diferent from 100%'
 ]

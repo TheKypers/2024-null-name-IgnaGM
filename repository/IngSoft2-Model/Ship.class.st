@@ -25,7 +25,7 @@ Ship class >> createWithName: aName [
 Ship class >> isValid: aName [
 
 	aName isEmpty ifTrue: [
-		Error signal: 'Ship cannot be created with no name' ]
+		InvalidArgumentExeption signal: 'Ship cannot be created with no name' ]
 ]
 
 { #category : #accessing }

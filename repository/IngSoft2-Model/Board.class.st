@@ -20,24 +20,24 @@ Class {
 Board class >> amountOfLapsIsValid: anAmountOfLaps [
 
 	anAmountOfLaps strictlyPositive ifFalse: [
-		Error signal: 'Cannot play with less than 1 lap' ]
+		InvalidArgumentExeption signal: 'Cannot play with less than 1 lap' ]
 ]
 
 { #category : #'argument validation' }
 Board class >> amountOfUnitIsValid: aBoardLength [
 
 	(aBoardLength toUnit: Parsec) nominalValue strictlyPositive ifFalse: [
-		Error signal: 'Board size in parsecs must be greater than 0' ].
+		InvalidArgumentExeption signal: 'Board size in parsecs must be greater than 0' ].
 	
 	(aBoardLength toUnit: LightYear) nominalValue >= 3 ifFalse: [
-		Error signal: 'Not enough LightYears for a single Parsec' ]
+		InvalidArgumentExeption signal: 'Not enough LightYears for a single Parsec' ]
 ]
 
 { #category : #'class initialization' }
 Board class >> numberOfTilesIsValid: aNumberOfTiles [
 
 	aNumberOfTiles strictlyPositive ifFalse: [
-		Error signal: 'Board tiles must be greater than 0' ]
+		InvalidArgumentExeption signal: 'Board tiles must be greater than 0' ]
 ]
 
 { #category : #'class initialization' }

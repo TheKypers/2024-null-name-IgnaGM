@@ -49,7 +49,7 @@ EffectsTest >> testBlackHoleEffectCannotBeAplliedAfterGameIsFinished [
 { #category : #tests }
 EffectsTest >> testMoonWalkDistanceCannotBeSmallerThanZero [
 	
-	self should: [ MoonWalkEffect withMoonwalkDistance: -3 ] raise: Error withMessage: 'Moonwalk distance must be strictly positive'
+	self should: [ MoonWalkEffect withMoonwalkDistance: -3 ] raise: InvalidArgumentExeption withMessage: 'Moonwalk distance must be strictly positive'
 	
 	
 ]

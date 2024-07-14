@@ -91,7 +91,7 @@ GameFinishTest >> testIfGameIsOngoingThereIsNoWinner [
 { #category : #tests }
 GameFinishTest >> testIfThereIsAWinnerThereAreNoMoreMovements [
 
-	| aGame aCollectionOfNames aCollectionOfDie aTileArray|
+	| aGame aCollectionOfNames aCollectionOfDie aTileArray |
 	aCollectionOfNames := OrderedCollection with: 'Juan' with: 'Jose'.
 
 	aCollectionOfDie := OrderedCollection
@@ -112,12 +112,11 @@ GameFinishTest >> testIfThereIsAWinnerThereAreNoMoreMovements [
 	aGame playTurn.
 	aGame playTurn.
 	aGame playTurn.
-	
+
 	self
 		should: [ aGame playTurn ]
 		raise: Error
-		withMessage: 'Game is Over you cant Keep Playing'.
-		
+		withMessage: 'Game is Over you cant Keep Playing'
 ]
 
 { #category : #tests }

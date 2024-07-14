@@ -14,7 +14,7 @@ Class {
 MoonWalkEffect class >> isValid: aDistance [
 
 	aDistance strictlyPositive ifFalse: [
-		Error signal: 'Moonwalk distance must be strictly positive' ]
+		InvalidArgumentExeption signal: 'Moonwalk distance must be strictly positive' ]
 ]
 
 { #category : #'class initialization' }
