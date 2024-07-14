@@ -25,7 +25,7 @@ HyperJumpEffect class >> withParsecArray: aParsecArray andLengthInTiles: lengthI
 HyperJumpEffect >> affectAShip: aShip [
 
 	aShip moveTiles:
-		(self currentParsec toUnit: Parsec) nominalValue asInteger
+		(self currentHyperJump toUnit: Parsec) nominalValue asInteger
 		* boardParsecToTileRatio
 ]
 
@@ -35,15 +35,16 @@ HyperJumpEffect >> affectAllShips: aShipCollection but: triggeringShip [
 	aShipCollection
 		reject: [ :aShip | aShip = triggeringShip ]
 		thenCollect: [ :aShip |
-			| aHypeJumpDistance |
-			aHypeJumpDistance := (self currentParsec toUnit: Parsec)
-				                     nominalValue asInteger
-			                     * boardParsecToTileRatio.
-			aShip moveTiles: aHypeJumpDistance ]
+			| aHypeJumpDistance aTileDistance |
+			aHypeJumpDistance := (self currentHyperJump toUnit: Parsec)
+				                     nominalValue asInteger.
+
+			aTileDistance := aHypeJumpDistance * boardParsecToTileRatio.
+			aShip moveTiles: aTileDistance ]
 ]
 
 { #category : #modifying }
-HyperJumpEffect >> currentParsec [
+HyperJumpEffect >> currentHyperJump [
 
 	| currentParsecNumber |
 	currentParsecNumber := hyperJumpArray indexOf: currentHyperJump.

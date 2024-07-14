@@ -10,7 +10,7 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #constants }
 Unit class >> ratioInParsecs [
 	^ self subclassResponsibility
 ]
@@ -36,7 +36,7 @@ Unit >> initializeWithNominalValue: aNominalValue [
 { #category : #accessing }
 Unit >> nominalValue [
 
-	^ nominalValue
+	^ nominalValue 
 ]
 
 { #category : #modifying }

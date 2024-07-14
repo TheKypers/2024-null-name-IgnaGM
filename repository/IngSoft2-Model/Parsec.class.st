@@ -7,7 +7,7 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #accessing }
+{ #category : #constants }
 Parsec class >> ratioInParsecs [
 
 	^ 1
