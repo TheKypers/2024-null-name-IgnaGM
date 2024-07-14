@@ -32,10 +32,10 @@ MoonWalkEffect >> affectAShip: aShip [
 ]
 
 { #category : #applying }
-MoonWalkEffect >> affectAllShips: aShipCollection but: aShip [
+MoonWalkEffect >> affectAllShips: aShipCollection but: triggeringShip [
 
 	aShipCollection
-		reject: [ :ship | ship = aShip ]
+		reject: [ :ship | ship = triggeringShip ]
 		thenCollect: [ :ship | ship moveTiles: moonWalkDistance negated ]
 ]
 

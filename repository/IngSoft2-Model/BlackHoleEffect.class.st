@@ -14,9 +14,9 @@ BlackHoleEffect >> affectAShip: aShip [
 ]
 
 { #category : #applying }
-BlackHoleEffect >> affectAllShips: aShipCollection but: currentTurnShip [
+BlackHoleEffect >> affectAllShips: aShipCollection but: triggeringShip [
 
 	aShipCollection
-		reject: [ :aShip | aShip = currentTurnShip ]
+		reject: [ :aShip | aShip = triggeringShip ]
 		thenCollect: [ :aShip | aShip moveTiles: -4 ]
 ]

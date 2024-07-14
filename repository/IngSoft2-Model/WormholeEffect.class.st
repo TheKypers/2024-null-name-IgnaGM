@@ -26,10 +26,10 @@ WormholeEffect >> affectAShip: aShip [
 ]
 
 { #category : #applying }
-WormholeEffect >> affectAllShips: aShipCollection but: currentTurnShip [
+WormholeEffect >> affectAllShips: aShipCollection but: triggeringShip [
 
 	aShipCollection
-		reject: [ :aShip | aShip = currentTurnShip ]
+		reject: [ :aShip | aShip = triggeringShip ]
 		thenCollect: [ :aShip | aShip moveToFirstTile ]
 ]
 
