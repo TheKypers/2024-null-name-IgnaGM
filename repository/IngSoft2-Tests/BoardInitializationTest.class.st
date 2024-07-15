@@ -57,7 +57,7 @@ BoardInitializationTest >> testBoardCannotBeInitializedWithLessThanThreeLightYea
 				withTileEffectCollection: aTileArray
 				withLengthInUnits: (LightYear withNominalValue: 2)
 				withAmountOfLaps: 1 ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'Not enough LightYears for a single Parsec'
 ]
 

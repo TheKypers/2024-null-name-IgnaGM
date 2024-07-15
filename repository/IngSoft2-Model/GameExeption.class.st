@@ -1,5 +1,5 @@
 Class {
 	#name : #GameExeption,
-	#superclass : #Error,
+	#superclass : #Exception,
 	#category : #'IngSoft2-Model'
 }
