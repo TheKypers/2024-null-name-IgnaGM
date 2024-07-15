@@ -115,7 +115,7 @@ GameFinishTest >> testIfThereIsAWinnerThereAreNoMoreMovements [
 
 	self
 		should: [ aGame playTurn ]
-		raise: PlayabilityExeption 
+		raise: Error 
 		withMessage: 'Game is Over you cant Keep Playing'
 ]
 
