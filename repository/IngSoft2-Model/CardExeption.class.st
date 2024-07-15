@@ -3,6 +3,6 @@ exeption for card related errors
 "
 Class {
 	#name : #CardExeption,
-	#superclass : #PlayabilityExeption,
+	#superclass : #GameExeption,
 	#category : #'IngSoft2-Model'
 }

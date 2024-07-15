@@ -3,6 +3,6 @@ Turn Exeption
 "
 Class {
 	#name : #TurnExeption,
-	#superclass : #PlayabilityExeption,
+	#superclass : #GameExeption,
 	#category : #'IngSoft2-Model'
 }
