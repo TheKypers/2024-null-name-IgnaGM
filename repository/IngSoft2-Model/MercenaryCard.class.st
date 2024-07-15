@@ -25,11 +25,13 @@ MercenaryCard >> canPlayRightNow: theShipInTurn [
 { #category : #event }
 MercenaryCard >> deactivate: aCardHandler [
 
-	aCardHandler removeCoalitionOf: holder and: target
+	aCardHandler removeCoalition:
+		(ShipCoalition withLeader: holder andMercenary: target objective)
 ]
 
 { #category : #event }
 MercenaryCard >> reverseCardEffectWith: anCardHandler [
 
-	anCardHandler reverseCoalition: holder andMercenary: target objective
+	anCardHandler reverseCoalition:
+		(ShipCoalition withLeader: holder andMercenary: target objective)
 ]

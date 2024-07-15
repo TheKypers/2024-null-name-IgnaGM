@@ -60,26 +60,19 @@ CoalitionHandler >> mercenariesOfShips: aShip [
 ]
 
 { #category : #comparing }
-CoalitionHandler >> modifyReverseCoalitionsWith: aLeader andMercenary: aMercenary [
+CoalitionHandler >> modifyReverseCoalitionsWith: aCoalition [
 
 	| aShipCoalition |
-	aShipCoalition := ShipCoalition
-		                  withLeader: aLeader
-		                  andMercenary: aMercenary.
+	aShipCoalition := aCoalition.
 
 	(coalitions detect: [ :coalition | coalition = aShipCoalition ])
 		reverseCoaltion
 ]
 
 { #category : #comparing }
-CoalitionHandler >> removeCoalitionOf: aLeader and: aMercenary [
+CoalitionHandler >> removeCoalition: aCoalition [
 
-	coalitions removeAllSuchThat: [ :coalition |
-		coalition
-		=
-		(ShipCoalition
-			 withLeader: aLeader
-			 andMercenary: aMercenary objective) ]
+	coalitions removeAllSuchThat: [ :coalition | coalition = aCoalition ]
 ]
 
 { #category : #comparing }

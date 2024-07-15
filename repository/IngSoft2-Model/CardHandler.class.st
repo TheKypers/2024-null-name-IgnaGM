@@ -115,9 +115,9 @@ CardHandler >> removeCardFromShipDeck: aCard [
 ]
 
 { #category : #comparing }
-CardHandler >> removeCoalitionOf: aLeader and: aMercenary [
+CardHandler >> removeCoalition: aCoalition [
 
-	coalitionHandler removeCoalitionOf: aLeader and: aMercenary
+	coalitionHandler removeCoalition: aCoalition
 ]
 
 { #category : #comparing }
@@ -134,9 +134,9 @@ CardHandler >> reverseCard: aCard [
 ]
 
 { #category : #modifying }
-CardHandler >> reverseCoalition: aLeader andMercenary: aMercenary [
+CardHandler >> reverseCoalition: aLeader [
 
-	coalitionHandler modifyReverseCoalitionsWith: aLeader andMercenary: aMercenary.
+	coalitionHandler modifyReverseCoalitionsWith: aLeader
 ]
 
 { #category : #modifying }
