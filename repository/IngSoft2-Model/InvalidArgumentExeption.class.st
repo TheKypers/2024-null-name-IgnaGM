@@ -1,5 +1,5 @@
 Class {
 	#name : #InvalidArgumentExeption,
-	#superclass : #Error,
+	#superclass : #PlayabilityExeption,
 	#category : #'IngSoft2-Model'
 }
