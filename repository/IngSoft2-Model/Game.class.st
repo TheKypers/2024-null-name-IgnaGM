@@ -96,7 +96,7 @@ Game >> allShipsPosition [
 Game >> canPlayNextTurnOf [
 
 	self isFinished ifTrue: [
-		Error signal: 'Game is Over you cant Keep Playing' ].
+		PlayabilityExeption signal: 'Game is Over you cant Keep Playing' ].
 ]
 
 { #category : #modifying }

@@ -88,7 +88,7 @@ CardPlayabilityTest >> testCannotPlayACardThatDoesNotHaveASetTarget [
 				playCard: NullCard
 				by: 'Juan'
 				toTarget: NullTarget new ]
-		raise: Error
+		raise: CardExeption 
 		withMessage: 'No target has been set'
 ]
 

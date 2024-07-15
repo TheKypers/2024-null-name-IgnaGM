@@ -10,5 +10,5 @@ Class {
 { #category : #verification }
 NullTarget >> isValidWith: aTargetValidator [
 
-	Error signal: 'No target has been set'
+	CardExeption signal: 'No target has been set'
 ]
