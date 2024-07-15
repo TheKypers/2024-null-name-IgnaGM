@@ -31,6 +31,7 @@ CoalitionHandler >> alliesWithEnemy: aEnemyShip [
 CoalitionHandler >> armyOf: aShip withEnemy: aEnemyShip [
 
 	| mercenariesCollections reversedMercenariesCollections armyCollection |
+	
 	mercenariesCollections := self mercenariesOfShips: aShip.
 	reversedMercenariesCollections := self alliesWithEnemy: aEnemyShip.
 
@@ -62,10 +63,7 @@ CoalitionHandler >> mercenariesOfShips: aShip [
 { #category : #comparing }
 CoalitionHandler >> modifyReverseCoalitionsWith: aCoalition [
 
-	| aShipCoalition |
-	aShipCoalition := aCoalition.
-
-	(coalitions detect: [ :coalition | coalition = aShipCoalition ])
+	(coalitions detect: [ :coalition | coalition = aCoalition ])
 		reverseCoaltion
 ]
 
