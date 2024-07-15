@@ -32,7 +32,7 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingABlackHoleEff
 		         withDice: (Dice with: aCollectionOfDie)
 		         withDeck: aDeck.
 
-	aTarget := TileTarget withObjective: 6.
+	aTarget := PositionTarget withObjective: 6.
 
 	aGame playCard: ReversePolarityCard by: 'Juan' toTarget: aTarget.
 	aGame playTurn.
@@ -74,7 +74,7 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingACardGenerato
 		         withDice: (Dice with: aCollectionOfDie)
 		         withDeck: aDeck.
 
-	aTarget := TileTarget withObjective: 6.
+	aTarget := PositionTarget withObjective: 6.
 
 	aGame playTurn.
 	aGame playCard: ReversePolarityCard by: 'Jose' toTarget: aTarget.
@@ -121,7 +121,7 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAHyperJumpEff
 		         withDice: (Dice with: aCollectionOfDie)
 		         withDeck: aDeck.
 
-	aTarget := TileTarget withObjective: 6.
+	aTarget := PositionTarget withObjective: 6.
 
 	aGame playCard: ReversePolarityCard by: 'Juan' toTarget: aTarget.
 	aGame playTurn.
@@ -164,7 +164,7 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAHyperSpaceJu
 		         withDice: (Dice with: aCollectionOfDie)
 		         withDeck: aDeck.
 
-	aTarget := TileTarget withObjective: 6.
+	aTarget := PositionTarget withObjective: 6.
 
 	aGame playCard: ReversePolarityCard by: 'Juan' toTarget: aTarget.
 	aGame playTurn.
@@ -206,7 +206,7 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAMoonWalkEffe
 		         withDice: (Dice with: aCollectionOfDie)
 		         withDeck: aDeck.
 
-	aTarget := TileTarget withObjective: 6.
+	aTarget := PositionTarget withObjective: 6.
 
 	aGame playCard: ReversePolarityCard by: 'Juan' toTarget: aTarget.
 	aGame playTurn.
@@ -250,7 +250,7 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAWormholeEffe
 		         withDice: (Dice with: aCollectionOfDie)
 		         withDeck: aDeck.
 
-	aTarget := TileTarget withObjective: 6.
+	aTarget := PositionTarget withObjective: 6.
 
 	aGame playCard: ReversePolarityCard by: 'Juan' toTarget: aTarget.
 	aGame playTurn.
@@ -292,7 +292,7 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAnAtomicBombE
 		         withDice: (Dice with: aCollectionOfDie)
 		         withDeck: aDeck.
 
-	aTarget := TileTarget withObjective: 6.
+	aTarget := PositionTarget withObjective: 6.
 
 	aGame playCard: ReversePolarityCard by: 'Juan' toTarget: aTarget.
 	aGame playTurn.
@@ -332,7 +332,7 @@ ReversePolarityTest >> testWhenReversePolarityCardIsPlayedTargetingAnNullEffectT
 		         withDice: (Dice with: aCollectionOfDie)
 		         withDeck: aDeck.
 
-	aTarget := TileTarget withObjective: 6.
+	aTarget := PositionTarget withObjective: 6.
 
 	aGame playCard: ReversePolarityCard by: 'Juan' toTarget: aTarget.
 	aGame playTurn.
@@ -375,7 +375,7 @@ ReversePolarityTest >> testWhenReversePolarityTargetigAnEffectIsAffectedByARever
 		         withDice: (Dice with: aCollectionOfDie)
 		         withDeck: aDeck.
 
-	aTarget := TileTarget withObjective: 6.
+	aTarget := PositionTarget withObjective: 6.
 	anotherTarget := CardTarget withObjective:
 		                 (ReversePolarityCard
 			                  withHolder: 'Juan'
@@ -396,7 +396,7 @@ ReversePolarityTest >> testWhenReversePolarityTargetigAnEffectIsAffectedByARever
 ]
 
 { #category : #tests }
-ReversePolarityTest >> testWhenReversePolarityTargetingABlackHoleEffectTileIsCanceledEffectIsNormalyApplied [
+ReversePolarityTest >> testWhenReversePolarityTargetingAnEffectIsCanceledEffectIsNormalyApplied [
 
 	| aGame aBoard aCollectionOfNames aCollectionOfDie aTileArray collectionOfCards aDeck aTarget anotherTarget |
 	aTileArray := OrderedCollection new.
@@ -424,7 +424,7 @@ ReversePolarityTest >> testWhenReversePolarityTargetingABlackHoleEffectTileIsCan
 		         withDice: (Dice with: aCollectionOfDie)
 		         withDeck: aDeck.
 
-	aTarget := TileTarget withObjective: 6.
+	aTarget := PositionTarget withObjective: 6.
 	anotherTarget := CardTarget withObjective:
 		                 (ReversePolarityCard
 			                  withHolder: 'Juan'

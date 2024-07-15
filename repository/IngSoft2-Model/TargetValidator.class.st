@@ -29,6 +29,15 @@ TargetValidator >> cardIsValid: aCardTarget [
 ]
 
 { #category : #validations }
+TargetValidator >> positionTargetIsValid: aPositionTarget [
+
+	board numbOfTiles < aPositionTarget ifTrue: [
+		Error signal: 'Targeted tile is out of bounds' ].
+
+	^ true
+]
+
+{ #category : #validations }
 TargetValidator >> shipTargetIsValid: aShipTarget [
 
 	(ships anySatisfy: [ :ship | ship shipName = aShipTarget ]) ifFalse: [
@@ -39,15 +48,6 @@ TargetValidator >> shipTargetIsValid: aShipTarget [
 TargetValidator >> targetIsValid: aTarget [
 
 	aTarget isValidWith: self
-]
-
-{ #category : #validations }
-TargetValidator >> tileTargetIsValid: aTileTarget [
-
-	board numbOfTiles < aTileTarget ifTrue: [
-		Error signal: 'Targeted tile is out of bounds' ].
-
-	^ true
 ]
 
 { #category : #initialization }
