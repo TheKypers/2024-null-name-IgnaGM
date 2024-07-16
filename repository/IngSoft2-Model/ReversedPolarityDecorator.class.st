@@ -2,7 +2,7 @@
 a
 "
 Class {
-	#name : #ReverseEffectDecorator,
+	#name : #ReversedPolarityDecorator,
 	#superclass : #Object,
 	#instVars : [
 		'wrappedEffect'
@@ -11,25 +11,25 @@ Class {
 }
 
 { #category : #'class initialization' }
-ReverseEffectDecorator class >> withEffect: anEffect [
+ReversedPolarityDecorator class >> withEffect: anEffect [
 
 	^ self new initializeWithEffect: anEffect
 ]
 
 { #category : #applying }
-ReverseEffectDecorator >> applyReverseOn: aGame activatedBy: aShip [
+ReversedPolarityDecorator >> applyReverseOn: aGame activatedBy: aShip [
 
 	wrappedEffect applyWith: aGame activatedBy: aShip
 ]
 
 { #category : #applying }
-ReverseEffectDecorator >> applyWith: anEffectManager activatedBy: aShip [
+ReversedPolarityDecorator >> applyWith: anEffectManager activatedBy: aShip [
 
 	wrappedEffect applyReverseOn: anEffectManager activatedBy: aShip
 ]
 
 { #category : #initialization }
-ReverseEffectDecorator >> initializeWithEffect: anEffect [ 
+ReversedPolarityDecorator >> initializeWithEffect: anEffect [ 
 	
 	wrappedEffect := anEffect.
 ]

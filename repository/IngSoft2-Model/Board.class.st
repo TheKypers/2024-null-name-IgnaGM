@@ -133,7 +133,7 @@ Board >> reversePolarityAt: aPosition [
 	tileEffectArray
 		at: aPosition
 		put:
-		(ReverseEffectDecorator withEffect:
+		(ReversedPolarityDecorator withEffect:
 			 (self effectInPosition: aPosition))
 ]
 
