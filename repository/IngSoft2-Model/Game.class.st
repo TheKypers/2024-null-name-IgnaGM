@@ -175,16 +175,12 @@ Game >> playTurn [
 	theShipInCurrentTurn moveTiles: diceMovement + cardMovment.
 
 	self adjustShipPosition: theShipInCurrentTurn.
-
-	gameEffectHandler lastEffectAppliedIs:
-		(gameBoard effectInPosition: theShipInCurrentTurn position).
-
 	gameEffectHandler applyTileEffectTriggeredBy: theShipInCurrentTurn.
 
 	shipBattleHandler
 		checkShipBattle: theShipInCurrentTurn
 		withCardHandler: gameCardHandler.
-		
+
 	gameTurnHandler checkForShipsWithNoShield.
 	gameTurnHandler nextTurn.
 	theShipInCurrentTurn := gameTurnHandler currentTurnShip

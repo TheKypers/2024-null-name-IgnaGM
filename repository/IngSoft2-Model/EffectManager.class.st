@@ -29,7 +29,9 @@ EffectManager >> applyEffectOnAllShips: anEffect [
 
 	ships do: [ :anAffectedShip |
 		board adjustShipPosition: anAffectedShip.
-		board snapToFinishTile: anAffectedShip ]
+		board snapToFinishTile: anAffectedShip ].
+
+	self lastEffectAppliedIs: anEffect
 ]
 
 { #category : #initialization }
@@ -38,7 +40,8 @@ EffectManager >> applyEffectOnAllShipsButOne: anEffect triggerByShip: aShip [
 	anEffect affectAllShips: ships but: aShip.
 	ships do: [ :anAffectedShip |
 		board adjustShipPosition: anAffectedShip.
-		board snapToFinishTile: anAffectedShip ]
+		board snapToFinishTile: anAffectedShip ].
+	self lastEffectAppliedIs: anEffect.
 ]
 
 { #category : #initialization }
@@ -46,7 +49,8 @@ EffectManager >> applyEffectOnOneShip: anEffect triggeredBy: aShip [
 
 	anEffect affectAShip: aShip.
 	board adjustShipPosition: aShip.
-	board snapToFinishTile: aShip
+	board snapToFinishTile: aShip.
+	self lastEffectAppliedIs: anEffect
 ]
 
 { #category : #initialization }
@@ -66,13 +70,15 @@ EffectManager >> applyTileEffectTriggeredBy: aShip [
 { #category : #'as yet unclassified' }
 EffectManager >> giveCardToAllShipsBut: aShip [
 
-	game giveCardToAllShipsBut: aShip
+	game giveCardToAllShipsBut: aShip.
+	self lastEffectAppliedIs: CardGeneratorEffect new.
 ]
 
 { #category : #initialization }
 EffectManager >> giveCardToCurrentShip: aShip [
 
-	game giveCardToCurrentShip: aShip
+	game giveCardToCurrentShip: aShip.
+	self lastEffectAppliedIs: CardGeneratorEffect new
 ]
 
 { #category : #initialization }
