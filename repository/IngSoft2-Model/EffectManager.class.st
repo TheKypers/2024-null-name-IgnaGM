@@ -22,7 +22,7 @@ EffectManager class >> withBoard: aBoard andShips: aCollectionOfShips andGame: a
 		  andGame: aGame
 ]
 
-{ #category : #initialization }
+{ #category : #modifying }
 EffectManager >> applyEffectOnAllShips: anEffect [
 
 	anEffect affectAShipCollection: ships.
@@ -34,7 +34,7 @@ EffectManager >> applyEffectOnAllShips: anEffect [
 	self lastEffectAppliedIs: anEffect
 ]
 
-{ #category : #initialization }
+{ #category : #modifying }
 EffectManager >> applyEffectOnAllShipsButOne: anEffect triggerByShip: aShip [
 
 	anEffect affectAllShips: ships but: aShip.
@@ -44,7 +44,7 @@ EffectManager >> applyEffectOnAllShipsButOne: anEffect triggerByShip: aShip [
 	self lastEffectAppliedIs: anEffect.
 ]
 
-{ #category : #initialization }
+{ #category : #modifying }
 EffectManager >> applyEffectOnOneShip: anEffect triggeredBy: aShip [
 
 	anEffect affectAShip: aShip.
@@ -53,7 +53,7 @@ EffectManager >> applyEffectOnOneShip: anEffect triggeredBy: aShip [
 	self lastEffectAppliedIs: anEffect
 ]
 
-{ #category : #initialization }
+{ #category : #event }
 EffectManager >> applyLastEffectOn: aTarget [
 
 	| aShip |
@@ -61,20 +61,20 @@ EffectManager >> applyLastEffectOn: aTarget [
 	lastEffect applyWith: self activatedBy: aShip
 ]
 
-{ #category : #initialization }
+{ #category : #event }
 EffectManager >> applyTileEffectTriggeredBy: aShip [
 
 	board applyTileEffectWith: self triggeredBy: aShip
 ]
 
-{ #category : #'as yet unclassified' }
+{ #category : #modifying }
 EffectManager >> giveCardToAllShipsBut: aShip [
 
 	game giveCardToAllShipsBut: aShip.
 	self lastEffectAppliedIs: CardGeneratorEffect new.
 ]
 
-{ #category : #initialization }
+{ #category : #modifying }
 EffectManager >> giveCardToCurrentShip: aShip [
 
 	game giveCardToCurrentShip: aShip.
@@ -90,19 +90,19 @@ EffectManager >> initializeWithBoard: aBoard andShips: aCollectionOfShips andGam
 	lastEffect := NullEffect
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 EffectManager >> lastEffectAppliedIs: anEffect [
 
 	lastEffect := anEffect
 ]
 
-{ #category : #initialization }
+{ #category : #modifying }
 EffectManager >> reversePolarityOfEffectAt: aTileTarget [
 
 	board reversePolarityAt: aTileTarget objective
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 EffectManager >> shipWithName: aShipName [
 
 	^ ships detect: [ :ship | ship shipName = aShipName ]

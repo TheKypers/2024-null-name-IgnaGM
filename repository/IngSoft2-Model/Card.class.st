@@ -36,7 +36,7 @@ Card >> activateWith: aCardHandler [
 	self subclassResponsibility 
 ]
 
-{ #category : #comparing }
+{ #category : #applying }
 Card >> applyMovement [
 
 	^ movement

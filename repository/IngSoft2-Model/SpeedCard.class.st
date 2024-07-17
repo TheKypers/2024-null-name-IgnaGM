@@ -16,12 +16,6 @@ SpeedCard >> activateWith: aCardHandler [
 ]
 
 { #category : #comparing }
-SpeedCard >> applyMovement [
-
-	^ movement 
-]
-
-{ #category : #comparing }
 SpeedCard >> canPlayRightNow: theShipInTurn [
 
 	^ theShipInTurn shipName = holder

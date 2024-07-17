@@ -17,12 +17,6 @@ AccelerationCard >> activateWith: aCardHandler [
 ]
 
 { #category : #comparing }
-AccelerationCard >> applyMovement [
-
-	^ movement
-]
-
-{ #category : #comparing }
 AccelerationCard >> canPlayRightNow: theShipInTurn [
 
 	^ theShipInTurn shipName = holder

@@ -30,7 +30,7 @@ Die >> initializeOf: anAmountOfFaces [
 	faces := anAmountOfFaces
 ]
 
-{ #category : #initialization }
+{ #category : #event }
 Die >> throw [
 
 	^ faces atRandom
