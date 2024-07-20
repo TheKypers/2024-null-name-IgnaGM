@@ -16,14 +16,14 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #'argument validation' }
+{ #category : #validation }
 Board class >> amountOfLapsIsValid: anAmountOfLaps [
 
 	anAmountOfLaps strictlyPositive ifFalse: [
 		InvalidArgumentExeption signal: 'Cannot play with less than 1 lap' ]
 ]
 
-{ #category : #'argument validation' }
+{ #category : #validation }
 Board class >> amountOfUnitIsValid: aBoardLength [
 
 	(aBoardLength toUnit: Parsec) nominalValue strictlyPositive ifFalse: [
@@ -33,7 +33,7 @@ Board class >> amountOfUnitIsValid: aBoardLength [
 		InvalidArgumentExeption signal: 'Not enough LightYears for a single Parsec' ]
 ]
 
-{ #category : #'class initialization' }
+{ #category : #validation }
 Board class >> numberOfTilesIsValid: aNumberOfTiles [
 
 	aNumberOfTiles strictlyPositive ifFalse: [

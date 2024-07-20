@@ -21,7 +21,7 @@ Ship class >> createWithName: aName [
 	^ self new initializeInTile: 1 withName: aName
 ]
 
-{ #category : #testing }
+{ #category : #validation }
 Ship class >> isValid: aName [
 
 	aName isEmpty ifTrue: [

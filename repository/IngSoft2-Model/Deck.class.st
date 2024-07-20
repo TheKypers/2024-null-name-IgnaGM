@@ -11,7 +11,7 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #'argument validation' }
+{ #category : #validation }
 Deck class >> probabilityDistributionIsValid: aProbabilityDistributionCollection [
 
 	| sum |

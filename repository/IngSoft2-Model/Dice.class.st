@@ -10,14 +10,14 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #testing }
+{ #category : #validation }
 Dice class >> isValid: aDieCollection [
 
 	aDieCollection isEmpty ifTrue: [
 		InvalidArgumentExeption signal: 'There should be at least 1 Die' ]
 ]
 
-{ #category : #'instance creation' }
+{ #category : #'class initialization' }
 Dice class >> with: aDieCollection [
 	self isValid: aDieCollection.
 	^(self new) inializeWith: aDieCollection

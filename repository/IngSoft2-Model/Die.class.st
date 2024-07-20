@@ -10,14 +10,14 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #testing }
+{ #category : #validation }
 Die class >> isValid: anAmountOfFaces [
 
 	anAmountOfFaces < 3 ifTrue: [
 		InvalidArgumentExeption signal: 'Faces should be more than 2' ]
 ]
 
-{ #category : #testing }
+{ #category : #'class initialization' }
 Die class >> of: anAmountOfFaces [
 
 	self isValid: anAmountOfFaces.
