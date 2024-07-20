@@ -1,3 +1,6 @@
+"
+a
+"
 Class {
 	#name : #Target,
 	#superclass : #Object,
@@ -7,7 +10,7 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #'as yet unclassified' }
+{ #category : #'class initialization' }
 Target class >> withObjective: anObjective [
 
 	^ self new initializeWithObjective: anObjective
@@ -19,8 +22,8 @@ Target >> initializeWithObjective: anObjective [
 	objective := anObjective.
 ]
 
-{ #category : #testing }
-Target >> isValidWith: aCollection and: aCardHandler [
+{ #category : #verification }
+Target >> isValidWith: aTargetValidator [
 
 	self subclassResponsibility
 ]

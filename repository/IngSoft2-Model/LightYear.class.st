@@ -7,7 +7,7 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #accessing }
+{ #category : #constants }
 LightYear class >> ratioInParsecs [
 
 	^ 3

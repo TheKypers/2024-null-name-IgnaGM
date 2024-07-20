@@ -1,8 +1,5 @@
-"
-exeption for card related errors
-"
 Class {
-	#name : #CardExeption,
+	#name : #InvalidArgumentExeption,
 	#superclass : #GameExeption,
 	#category : #'IngSoft2-Model'
 }

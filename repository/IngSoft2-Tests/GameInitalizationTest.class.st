@@ -17,7 +17,7 @@ GameInitalizationTest >> testGameCannotBeInitializedWithoutABoard [
 				withBoard: aBoard
 				withShipNames: aCollectionOfNames
 				withDice: (Dice with: aCollectionOfDie) ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'Game cannot be started without a board'
 ]
 
@@ -41,7 +41,7 @@ GameInitalizationTest >> testGameCannotBeInitializedWithoutADice [
 				withBoard: aBoard
 				withShipNames: aCollectionOfNames
 				withDice: aDie ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'Game cannot be started without at least one die'
 ]
 
@@ -64,7 +64,7 @@ GameInitalizationTest >> testGameCannotBeInitializedWithoutAnyShipNames [
 				          withAmountOfLaps: 1)
 				withShipNames: aCollectionOfNames
 				withDice: (Dice with: aCollectionOfDie) ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'Game cannot be created without any Ship names'
 ]
 

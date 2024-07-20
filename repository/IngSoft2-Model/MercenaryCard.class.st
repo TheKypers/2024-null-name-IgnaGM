@@ -1,3 +1,6 @@
+"
+a
+"
 Class {
 	#name : #MercenaryCard,
 	#superclass : #Card,
@@ -5,15 +8,12 @@ Class {
 }
 
 { #category : #event }
-MercenaryCard >> activate: aCardHandler withTarget: aTarget [
+MercenaryCard >> activateWith: aCardHandler [
 
-	target := aTarget.
-	
-	aCardHandler verifyCoalition: target objective.
 	aCardHandler addCoalition:
 		(ShipCoalition withLeader: holder andMercenary: target objective).
 	aCardHandler addToActiveCards: self.
-	aCardHandler changeLastCardTo: self.
+	aCardHandler changeLastCardTo: self
 ]
 
 { #category : #comparing }
@@ -25,5 +25,13 @@ MercenaryCard >> canPlayRightNow: theShipInTurn [
 { #category : #event }
 MercenaryCard >> deactivate: aCardHandler [
 
-	aCardHandler removeCoalitionOf: holder and: target
+	aCardHandler removeCoalition:
+		(ShipCoalition withLeader: holder andMercenary: target objective)
+]
+
+{ #category : #event }
+MercenaryCard >> reverseCardEffectWith: anCardHandler [
+
+	anCardHandler reverseCoalition:
+		(ShipCoalition withLeader: holder andMercenary: target objective)
 ]

@@ -1,3 +1,6 @@
+"
+a
+"
 Class {
 	#name : #RepeatCard,
 	#superclass : #Card,
@@ -5,12 +8,10 @@ Class {
 }
 
 { #category : #event }
-RepeatCard >> activate: aCardHandler withTarget: aTarget [
+RepeatCard >> activateWith: aCardHandler [
 
-	target:= aTarget.
-	aCardHandler applyLastEffectOn: aTarget.
-	aCardHandler changeLastCardTo: self.
-	
+	aCardHandler applyLastEffectOn: target.
+	aCardHandler changeLastCardTo: self
 ]
 
 { #category : #comparing }

@@ -6,82 +6,96 @@ Class {
 	#superclass : #Object,
 	#instVars : [
 		'dice',
-		'ships'
+		'ships',
+		'cardHanlder',
+		'coalitionHanlder'
 	],
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #events }
-ShipBattle class >> withDice: aCollectionOfDice withShips: aCollectionOfShips [
+{ #category : #'class initialization' }
+ShipBattle class >> withDice: aCollectionOfDice withShips: aCollectionOfShips andCoalitionHandler: aColitionHandler [
 
 	^ self new
 		  initializeWithShips: aCollectionOfShips
 		  withDice: aCollectionOfDice
+		andCoalitionHandler:aColitionHandler.
+			
 ]
 
 { #category : #initialization }
 ShipBattle >> checkShipBattle: currentTurnShip withCardHandler: gameCardHandler [
 
 	| shipsInSamePosition |
+	cardHanlder := gameCardHandler.
 	currentTurnShip position = 1 ifTrue: [ ^ self ].
 	shipsInSamePosition := ships select: [ :aShip |
 		                       (currentTurnShip inSamePositionAs: aShip)
 			                       and:
-				                       ((gameCardHandler mercenariesOf:
-					                         currentTurnShip) includes:
-					                        aShip shipName) not ].
+			                       (coalitionHanlder
+				                        ship: aShip
+				                        isNotAnAllyOf: currentTurnShip) ].
 	shipsInSamePosition do: [ :aShipInSamePosition |
 		currentTurnShip position = 1 ifTrue: [ ^ self ].
-		self
-			resolveBattleBetween: currentTurnShip
-			and: aShipInSamePosition
-			with: gameCardHandler ]
+		self resolveBattleBetween: currentTurnShip and: aShipInSamePosition ]
 ]
 
 { #category : #initialization }
-ShipBattle >> initializeWithShips: aCollectionOfShips withDice: aCollectionOfDice [
+ShipBattle >> initializeWithShips: aCollectionOfShips withDice: aCollectionOfDice andCoalitionHandler: aColitionHandler [
 
 	dice := aCollectionOfDice.
 	ships := aCollectionOfShips.
+	coalitionHanlder := aColitionHandler.
 ]
 
 { #category : #event }
-ShipBattle >> resolveBattleBetween: aShip and: anotherShip with: aCardHandler [
+ShipBattle >> resolveBattleBetween: aShip and: anotherShip [
 
 	| anArmyOfShipsDiceRoll anotherArmyOfShipsDiceRoll loserShipArmy aShipArmy anotherShipArmy |
-	aShipArmy := self shipsNames: (aCardHandler mercenariesOf: aShip).
+	aShipArmy := self shipsNames:
+		             (coalitionHanlder armyOf: aShip withEnemy: anotherShip).
+	
 	anotherShipArmy := self shipsNames:
-		                   (aCardHandler mercenariesOf: anotherShip).
+		                   (coalitionHanlder
+			                    armyOf: anotherShip
+			                    withEnemy: aShip).
 
-	anArmyOfShipsDiceRoll := 0.
-	anotherArmyOfShipsDiceRoll := 0.
-	
-	aShipArmy do: [ :aShipInArmy |
-		| cardMovement |
-		cardMovement := aCardHandler movementCardsActivated: aShipInArmy.
-		anArmyOfShipsDiceRoll := anArmyOfShipsDiceRoll + dice throw + cardMovement ].
+	anArmyOfShipsDiceRoll := self throwForBattle: aShipArmy.
+	anotherArmyOfShipsDiceRoll := self throwForBattle: anotherShipArmy.
 
-	anotherShipArmy do: [ :aShipInArmy |
-		| cardMovement |
-		cardMovement := aCardHandler movementCardsActivated: aShipInArmy.
-		anotherArmyOfShipsDiceRoll := anotherArmyOfShipsDiceRoll + dice throw + cardMovement ].
-	
 	loserShipArmy := anArmyOfShipsDiceRoll > anotherArmyOfShipsDiceRoll
 		                 ifTrue: [ anotherShipArmy ]
 		                 ifFalse: [ aShipArmy ].
-	loserShipArmy do: [ :aShipInArmy |
-		aShip loseOneShield.
-		aShip moveToFirstTile ]
+
+	loserShipArmy do: [ :aEnemyShip |
+		aEnemyShip loseOneShield.
+		aEnemyShip moveToFirstTile ]
 ]
 
-{ #category : #event }
+{ #category : #translating }
 ShipBattle >> shipWithName: aShipName [
 
 	^ ships detect: [ :ship | ship shipName = aShipName ]
 ]
 
-{ #category : #event }
+{ #category : #translating }
 ShipBattle >> shipsNames: aShipsNameCollection [
-	
-	^ aShipsNameCollection collect: [ :shipName | self shipWithName: shipName  ].
+
+	^ aShipsNameCollection collect: [ :shipName |
+		  self shipWithName: shipName ]
+]
+
+{ #category : #event }
+ShipBattle >> throwForBattle: anArmy [
+
+	| armyOfShipsDiceRoll |
+	armyOfShipsDiceRoll := 0.
+
+	anArmy do: [ :aShipInArmy |
+		| cardMovement |
+		cardMovement := cardHanlder movementCardsActivated: aShipInArmy.
+		armyOfShipsDiceRoll := armyOfShipsDiceRoll + dice throw
+		                       + cardMovement ].
+
+	^ armyOfShipsDiceRoll
 ]

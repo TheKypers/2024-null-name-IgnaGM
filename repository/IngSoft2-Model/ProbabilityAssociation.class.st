@@ -23,7 +23,7 @@ ProbabilityAssociation class >> associate: anObject withProbability: aProbabilit
 	
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 ProbabilityAssociation >> associatedObject [
 
 	^ associatedObject value
@@ -39,7 +39,7 @@ ProbabilityAssociation >> initializeWithAssociation: anObject withProbability: a
 	upperBound := aProbability
 ]
 
-{ #category : #initialization }
+{ #category : #accessing }
 ProbabilityAssociation >> probability [
 
 	^ probability

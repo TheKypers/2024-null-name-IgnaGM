@@ -1,11 +1,14 @@
+"
+a
+"
 Class {
 	#name : #AllShipsTarget,
 	#superclass : #Target,
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #testing }
-AllShipsTarget >> isValidWith: aCollection and: aCardHandler [
+{ #category : #verification }
+AllShipsTarget >> isValidWith: aTargetValidator [
 
-	^ true
+	^ self
 ]

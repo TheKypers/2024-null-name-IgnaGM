@@ -14,7 +14,7 @@ Class {
 MoonWalkEffect class >> isValid: aDistance [
 
 	aDistance strictlyPositive ifFalse: [
-		Error signal: 'Moonwalk distance must be strictly positive' ]
+		InvalidArgumentExeption signal: 'Moonwalk distance must be strictly positive' ]
 ]
 
 { #category : #'class initialization' }
@@ -26,11 +26,17 @@ MoonWalkEffect class >> withMoonwalkDistance: aDistance [
 ]
 
 { #category : #applying }
-MoonWalkEffect >> affectAllShips: aShipCollection but: currentTurnShip [
+MoonWalkEffect >> affectAShip: aShip [
+
+	aShip moveTiles: moonWalkDistance negated
+]
+
+{ #category : #applying }
+MoonWalkEffect >> affectAllShips: aShipCollection but: triggeringShip [
 
 	aShipCollection
-		reject: [ :aShip | aShip = currentTurnShip ]
-		thenCollect: [ :aShip | aShip moveTiles: moonWalkDistance negated ]
+		reject: [ :ship | ship = triggeringShip ]
+		thenCollect: [ :ship | ship moveTiles: moonWalkDistance negated ]
 ]
 
 { #category : #generators }

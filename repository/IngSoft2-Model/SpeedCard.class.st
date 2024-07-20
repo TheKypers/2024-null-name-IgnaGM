@@ -1,3 +1,6 @@
+"
+a
+"
 Class {
 	#name : #SpeedCard,
 	#superclass : #Card,
@@ -5,23 +8,23 @@ Class {
 }
 
 { #category : #event }
-SpeedCard >> activate: aCardHandler withTarget: aTarget [
+SpeedCard >> activateWith: aCardHandler [
 
-	target := aTarget.
+	movement := 1.
 	aCardHandler addToActiveCards: self.
-	aCardHandler changeLastCardTo: self.
-]
-
-{ #category : #comparing }
-SpeedCard >> applyMovement [
-
-	^ 1
+	aCardHandler changeLastCardTo: self
 ]
 
 { #category : #comparing }
 SpeedCard >> canPlayRightNow: theShipInTurn [
 
 	^ theShipInTurn shipName = holder
+]
+
+{ #category : #event }
+SpeedCard >> reverseCardEffectWith: aCardHandler [
+
+	movement := movement negated
 ]
 
 { #category : #comparing }

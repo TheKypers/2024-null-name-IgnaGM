@@ -19,7 +19,7 @@ BoardInitializationTest >> testBoardCannotBeInitializedWithLessThanOneParsec [
 				withTileEffectCollection: aTileArray
 				withLengthInUnits: (Parsec withNominalValue: 0)
 				withAmountOfLaps: 1 ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'Board size in parsecs must be greater than 0'
 ]
 
@@ -38,7 +38,7 @@ BoardInitializationTest >> testBoardCannotBeInitializedWithLessThanOneTile [
 				          withTileEffectCollection: aTileArray
 				          withLengthInUnits: 0
 				          withAmountOfLaps: 1 ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'Board tiles must be greater than 0'
 ]
 
@@ -57,7 +57,7 @@ BoardInitializationTest >> testBoardCannotBeInitializedWithLessThanThreeLightYea
 				withTileEffectCollection: aTileArray
 				withLengthInUnits: (LightYear withNominalValue: 2)
 				withAmountOfLaps: 1 ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'Not enough LightYears for a single Parsec'
 ]
 
@@ -75,7 +75,7 @@ BoardInitializationTest >> testBoardMustHaveAtLeast1Lap [
 				withTileEffectCollection: aTileArray
 				withLengthInUnits: 4
 				withAmountOfLaps: 0]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'Cannot play with less than 1 lap'
 ]
 
@@ -100,7 +100,7 @@ BoardInitializationTest >> testSpecialTilesCannotBeCreatedIfPositionsExceedBoard
 				withWormHolePair: aWormHolePair
 				withHyperJumpArray: #( 1 1 1 )
 				withAmountOfLaps: 1 ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'Wormhole tiles are out of bounds'
 ]
 
@@ -143,6 +143,6 @@ BoardInitializationTest >> testWormHoleEffectCannotBeCreatedInFirstTileOfBoard [
 				withWormHolePair: aWormHolePair
 				withHyperJumpArray: #( 1 1 1 )
 				withAmountOfLaps: 1 ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'Wormhole cannot be created in first tile of board'
 ]

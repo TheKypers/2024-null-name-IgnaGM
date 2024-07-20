@@ -1,3 +1,6 @@
+"
+a
+"
 Class {
 	#name : #CancellationCard,
 	#superclass : #Card,
@@ -5,14 +8,12 @@ Class {
 }
 
 { #category : #event }
-CancellationCard >> activate: aCardHandler withTarget: aCard [
+CancellationCard >> activateWith: aCardHandler [
 
-	target := aCard.
-	
-	aCardHandler deactivate: aCard.
+	aCardHandler deactivate: target.
 	aCardHandler removeFromActiveCard: target objective.
-	
-	aCardHandler changeLastCardTo: self.
+
+	aCardHandler changeLastCardTo: self
 ]
 
 { #category : #comparing }

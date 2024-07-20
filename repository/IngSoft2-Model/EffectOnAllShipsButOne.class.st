@@ -8,13 +8,27 @@ Class {
 }
 
 { #category : #applying }
+EffectOnAllShipsButOne >> affectAShip: aShip [
+
+	self subclassResponsibility
+]
+
+{ #category : #applying }
 EffectOnAllShipsButOne >> affectAllShips: aCollection but: aShip [
 
 	^ self subclassResponsibility
 ]
 
 { #category : #applying }
-EffectOnAllShipsButOne >> applyOn: aGame activatedBy: aShip [
+EffectOnAllShipsButOne >> applyReverseWith: anEffectManager activatedBy: aShip [
 
-	aGame applyEffectOnAllShipsButOne: self triggerByShip: aShip.
+	anEffectManager applyEffectOnOneShip: self triggeredBy: aShip
+]
+
+{ #category : #applying }
+EffectOnAllShipsButOne >> applyWith: anEffectManager activatedBy: aShip [
+
+	anEffectManager
+		applyEffectOnAllShipsButOne: self
+		triggerByShip: aShip
 ]

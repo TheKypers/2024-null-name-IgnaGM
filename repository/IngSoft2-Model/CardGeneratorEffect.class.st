@@ -8,7 +8,13 @@ Class {
 }
 
 { #category : #applying }
-CardGeneratorEffect >> applyOn: aGame activatedBy: aShip [
+CardGeneratorEffect >> applyReverseWith: anEffectManager activatedBy: aShip [
 
-	aGame giveCardToCurrentShip: aShip
+	anEffectManager giveCardToAllShipsBut: aShip
+]
+
+{ #category : #applying }
+CardGeneratorEffect >> applyWith: anEffectManager activatedBy: aShip [
+
+	anEffectManager giveCardToCurrentShip: aShip
 ]

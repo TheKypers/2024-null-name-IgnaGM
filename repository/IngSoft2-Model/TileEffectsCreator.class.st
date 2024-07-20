@@ -32,7 +32,7 @@ TileEffectsCreator class >> probabilityDistributionIsValid: aProbabilityDistribu
 	aProbabilityDistributionCollection do: [ :effectProbability |
 		sum := sum + effectProbability probability ].
 	sum = 100 ifFalse: [
-		Error signal:
+		InvalidArgumentExeption signal:
 			'Total efffect probabilities cannot be diferent from 100%' ]
 ]
 
@@ -145,9 +145,9 @@ TileEffectsCreator >> wormHolePairIsValid: aWormHolePair with: aNumberOfTiles [
 
 	(aWormHolePair allSatisfy: [ :i |
 		 i <= aNumberOfTiles and: i strictlyPositive ]) ifFalse: [
-		Error signal: 'Wormhole tiles are out of bounds' ].
+		InvalidArgumentExeption signal: 'Wormhole tiles are out of bounds' ].
 	(aWormHolePair anySatisfy: [ :i | i = 1 ]) ifTrue: [
-		Error signal: 'Wormhole cannot be created in first tile of board' ].
+		InvalidArgumentExeption signal: 'Wormhole cannot be created in first tile of board' ].
 	aWormHolePair first = aWormHolePair last ifTrue: [
-		Error signal: 'Wormhole tiles cannot be in the same position' ]
+		InvalidArgumentExeption signal: 'Wormhole tiles cannot be in the same position' ]
 ]

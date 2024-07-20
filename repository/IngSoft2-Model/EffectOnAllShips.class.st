@@ -14,7 +14,13 @@ EffectOnAllShips >> affectAShipCollection: aShipCollection [
 ]
 
 { #category : #applying }
-EffectOnAllShips >> applyOn: aGame activatedBy: aShip [
+EffectOnAllShips >> applyReverseWith: anEffectManager activatedBy: triggeringShip [
 
-	aGame applyEffectOnAllShips: self
+	^ self
+]
+
+{ #category : #applying }
+EffectOnAllShips >> applyWith: anEffectManager activatedBy: aShip [
+
+	anEffectManager applyEffectOnAllShips: self
 ]

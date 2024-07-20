@@ -21,11 +21,11 @@ Ship class >> createWithName: aName [
 	^ self new initializeInTile: 1 withName: aName
 ]
 
-{ #category : #testing }
+{ #category : #validation }
 Ship class >> isValid: aName [
 
 	aName isEmpty ifTrue: [
-		Error signal: 'Ship cannot be created with no name' ]
+		InvalidArgumentExeption signal: 'Ship cannot be created with no name' ]
 ]
 
 { #category : #accessing }

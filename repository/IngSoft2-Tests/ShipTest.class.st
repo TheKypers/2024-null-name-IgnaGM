@@ -31,7 +31,7 @@ ShipTest >> testShipCannotBeCreatedWithNoName [
 	aName := ''.
 	self
 		should: [ Ship createWithName: aName ]
-		raise: Error
+		raise: InvalidArgumentExeption
 		withMessage: 'Ship cannot be created with no name'
 ]
 

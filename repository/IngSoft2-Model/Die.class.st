@@ -10,14 +10,14 @@ Class {
 	#category : #'IngSoft2-Model'
 }
 
-{ #category : #testing }
+{ #category : #validation }
 Die class >> isValid: anAmountOfFaces [
 
 	anAmountOfFaces < 3 ifTrue: [
-		Error signal: 'Faces should be more than 2' ]
+		InvalidArgumentExeption signal: 'Faces should be more than 2' ]
 ]
 
-{ #category : #testing }
+{ #category : #'class initialization' }
 Die class >> of: anAmountOfFaces [
 
 	self isValid: anAmountOfFaces.
@@ -30,7 +30,7 @@ Die >> initializeOf: anAmountOfFaces [
 	faces := anAmountOfFaces
 ]
 
-{ #category : #initialization }
+{ #category : #event }
 Die >> throw [
 
 	^ faces atRandom

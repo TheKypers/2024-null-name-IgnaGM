@@ -1,9 +1,13 @@
+"
+a
+"
 Class {
 	#name : #ShipCoalition,
 	#superclass : #Object,
 	#instVars : [
 		'leader',
-		'mercenary'
+		'mercenary',
+		'isReversed'
 	],
 	#category : #'IngSoft2-Model'
 }
@@ -37,10 +41,23 @@ ShipCoalition >> initializeWithLeader: aLeader andMercenary: aMercenary [
 
 	leader := aLeader.
 	mercenary := aMercenary.
+	isReversed := false
+]
+
+{ #category : #accessing }
+ShipCoalition >> isReversed [
+
+	^ isReversed
 ]
 
 { #category : #accessing }
 ShipCoalition >> mercenary [
 
 	^ mercenary
+]
+
+{ #category : #modifying }
+ShipCoalition >> reverseCoaltion [
+
+	isReversed := isReversed not
 ]

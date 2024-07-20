@@ -8,7 +8,13 @@ Class {
 }
 
 { #category : #applying }
-NullEffect >> applyOn: aGame activatedBy: aShip [
+NullEffect >> applyReverseWith: anEffectManager activatedBy: aShip [
+
+	^ self
+]
+
+{ #category : #applying }
+NullEffect >> applyWith: anEffectManager activatedBy: aShip [
 
 	^ self
 ]

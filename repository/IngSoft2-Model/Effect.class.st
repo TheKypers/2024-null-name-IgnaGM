@@ -8,9 +8,15 @@ Class {
 }
 
 { #category : #applying }
-Effect >> applyOn: aGame activatedBy: aShip [
+Effect >> applyReverseWith: anEffectManager activatedBy: aShip [
 
-	self subclassResponsibility.
+	self subclassResponsibility
+]
+
+{ #category : #applying }
+Effect >> applyWith: anEffectManager activatedBy: aShip [
+
+	self subclassResponsibility
 ]
 
 { #category : #generators }
