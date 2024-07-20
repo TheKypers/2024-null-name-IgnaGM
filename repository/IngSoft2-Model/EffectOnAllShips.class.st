@@ -14,7 +14,7 @@ EffectOnAllShips >> affectAShipCollection: aShipCollection [
 ]
 
 { #category : #applying }
-EffectOnAllShips >> applyReverseOn: anEffectManager activatedBy: triggeringShip [
+EffectOnAllShips >> applyReverseWith: anEffectManager activatedBy: triggeringShip [
 
 	^ self
 ]

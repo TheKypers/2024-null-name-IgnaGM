@@ -3,12 +3,12 @@ a
 "
 Class {
 	#name : #CardGeneratorEffect,
-	#superclass : #EffectOnAGame,
+	#superclass : #Effect,
 	#category : #'IngSoft2-Model'
 }
 
 { #category : #applying }
-CardGeneratorEffect >> applyReverseOn: anEffectManager activatedBy: aShip [
+CardGeneratorEffect >> applyReverseWith: anEffectManager activatedBy: aShip [
 
 	anEffectManager giveCardToAllShipsBut: aShip
 ]

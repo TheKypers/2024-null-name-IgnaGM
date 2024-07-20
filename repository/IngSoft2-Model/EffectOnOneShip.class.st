@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #applying }
-EffectOnOneShip >> applyReverseOn: aGame activatedBy: aShip [
+EffectOnOneShip >> applyReverseWith: aGame activatedBy: aShip [
 
 	aGame applyEffectOnAllShipsButOne: self triggerByShip: aShip
 ]

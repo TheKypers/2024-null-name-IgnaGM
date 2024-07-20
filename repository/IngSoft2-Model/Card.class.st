@@ -33,7 +33,7 @@ Card >> = aCard [
 { #category : #event }
 Card >> activateWith: aCardHandler [
 
-	self subclassResponsibility 
+	self subclassResponsibility
 ]
 
 { #category : #applying }

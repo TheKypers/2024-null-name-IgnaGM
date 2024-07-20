@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #applying }
-NullEffect >> applyReverseOn: anEffectManager activatedBy: aShip [
+NullEffect >> applyReverseWith: anEffectManager activatedBy: aShip [
 
 	^ self
 ]

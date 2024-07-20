@@ -11,7 +11,7 @@ Class {
 { #category : #event }
 AccelerationCard >> activateWith: aCardHandler [
 
-	movement  := 1.
+	movement := 1.
 	aCardHandler addToActiveCards: self.
 	aCardHandler changeLastCardTo: self
 ]

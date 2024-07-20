@@ -8,7 +8,7 @@ Class {
 }
 
 { #category : #applying }
-ReversedPolarityDecorator >> applyReverseOn: aGame activatedBy: aShip [
+ReversedPolarityDecorator >> applyReverseWith: aGame activatedBy: aShip [
 
 	wrappedEffect applyWith: aGame activatedBy: aShip
 ]
@@ -16,5 +16,5 @@ ReversedPolarityDecorator >> applyReverseOn: aGame activatedBy: aShip [
 { #category : #applying }
 ReversedPolarityDecorator >> applyWith: anEffectManager activatedBy: aShip [
 
-	wrappedEffect applyReverseOn: anEffectManager activatedBy: aShip
+	wrappedEffect applyReverseWith: anEffectManager activatedBy: aShip
 ]

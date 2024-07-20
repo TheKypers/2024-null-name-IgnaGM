@@ -20,7 +20,7 @@ EffectOnAllShipsButOne >> affectAllShips: aCollection but: aShip [
 ]
 
 { #category : #applying }
-EffectOnAllShipsButOne >> applyReverseOn: anEffectManager activatedBy: aShip [
+EffectOnAllShipsButOne >> applyReverseWith: anEffectManager activatedBy: aShip [
 
 	anEffectManager applyEffectOnOneShip: self triggeredBy: aShip
 ]
