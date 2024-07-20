@@ -74,6 +74,13 @@ CoalitionHandler >> removeCoalition: aCoalition [
 ]
 
 { #category : #comparing }
+CoalitionHandler >> ship: aShip isNotAnAllyOf: currentTurnShip [
+
+	^ ((self armyOf: currentTurnShip withEnemy: currentTurnShip)
+		   includes: aShip shipName) not
+]
+
+{ #category : #comparing }
 CoalitionHandler >> verifyCoalition: mercenaryShip [
 
 	(coalitions anySatisfy: [ :coalition |

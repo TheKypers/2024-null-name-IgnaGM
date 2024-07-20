@@ -116,21 +116,35 @@ Game >> giveCardToCurrentShip: aShip [
 { #category : #initialization }
 Game >> initializeGameWith: aBoard withShipNames: aNameCollection withDice: aDice withGameDeck: aDeck [
 
+	| aCoalitionHandler |
 	gameBoard := aBoard.
 	gameShips := aNameCollection asOrderedCollection collect: [ :aName |
 		             Ship createWithName: aName ].
 
 	dice := aDice.
 	gameTurnHandler := TurnHandler withShips: gameShips.
-	shipBattleHandler := ShipBattle withDice: dice withShips: gameShips.
+
+	aCoalitionHandler := CoalitionHandler new.
+
+	shipBattleHandler := ShipBattle
+		                     withDice: dice
+		                     withShips: gameShips
+		                     andCoalitionHandler: aCoalitionHandler.
+
 	gameEffectHandler := EffectManager
 		                     withBoard: gameBoard
 		                     andShips: gameShips
 		                     andGame: self.
 
-	gameCardHandler := CardHandler withDeck: aDeck andEffectHandler: gameEffectHandler.
-	
-	targetValidator := TargetValidator withBoard: gameBoard withShips: gameShips andCardHandler:  gameCardHandler.
+	gameCardHandler := CardHandler
+		                   withDeck: aDeck
+		                   withEffectHandler: gameEffectHandler
+		                   andCoalitionHandler: aCoalitionHandler.
+
+	targetValidator := TargetValidator
+		                   withBoard: gameBoard
+		                   withShips: gameShips
+		                   andCardHandler: gameCardHandler.
 
 	theShipInCurrentTurn := gameTurnHandler currentTurnShip.
 	gameShips do: [ :ship | gameCardHandler startingCards: ship shipName ]

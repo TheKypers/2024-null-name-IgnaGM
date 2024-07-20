@@ -7,17 +7,20 @@ Class {
 	#instVars : [
 		'dice',
 		'ships',
-		'cardHanlder'
+		'cardHanlder',
+		'coalitionHanlder'
 	],
 	#category : #'IngSoft2-Model'
 }
 
 { #category : #'class initialization' }
-ShipBattle class >> withDice: aCollectionOfDice withShips: aCollectionOfShips [
+ShipBattle class >> withDice: aCollectionOfDice withShips: aCollectionOfShips andCoalitionHandler: aColitionHandler [
 
 	^ self new
 		  initializeWithShips: aCollectionOfShips
 		  withDice: aCollectionOfDice
+		andCoalitionHandler:aColitionHandler.
+			
 ]
 
 { #category : #initialization }
@@ -29,20 +32,20 @@ ShipBattle >> checkShipBattle: currentTurnShip withCardHandler: gameCardHandler 
 	shipsInSamePosition := ships select: [ :aShip |
 		                       (currentTurnShip inSamePositionAs: aShip)
 			                       and:
-				                       ((cardHanlder
-					                         armyOf: currentTurnShip
-					                         withEnemy: currentTurnShip) includes:
-					                        aShip shipName) not ].
+			                       (coalitionHanlder
+				                        ship: aShip
+				                        isNotAnAllyOf: currentTurnShip) ].
 	shipsInSamePosition do: [ :aShipInSamePosition |
 		currentTurnShip position = 1 ifTrue: [ ^ self ].
 		self resolveBattleBetween: currentTurnShip and: aShipInSamePosition ]
 ]
 
 { #category : #initialization }
-ShipBattle >> initializeWithShips: aCollectionOfShips withDice: aCollectionOfDice [
+ShipBattle >> initializeWithShips: aCollectionOfShips withDice: aCollectionOfDice andCoalitionHandler: aColitionHandler [
 
 	dice := aCollectionOfDice.
 	ships := aCollectionOfShips.
+	coalitionHanlder := aColitionHandler.
 ]
 
 { #category : #event }
@@ -50,10 +53,12 @@ ShipBattle >> resolveBattleBetween: aShip and: anotherShip [
 
 	| anArmyOfShipsDiceRoll anotherArmyOfShipsDiceRoll loserShipArmy aShipArmy anotherShipArmy |
 	aShipArmy := self shipsNames:
-		             (cardHanlder armyOf: aShip withEnemy: anotherShip).
-
+		             (coalitionHanlder armyOf: aShip withEnemy: anotherShip).
+	
 	anotherShipArmy := self shipsNames:
-		                   (cardHanlder armyOf: anotherShip withEnemy: aShip).
+		                   (coalitionHanlder
+			                    armyOf: anotherShip
+			                    withEnemy: aShip).
 
 	anArmyOfShipsDiceRoll := self throwForBattle: aShipArmy.
 	anotherArmyOfShipsDiceRoll := self throwForBattle: anotherShipArmy.

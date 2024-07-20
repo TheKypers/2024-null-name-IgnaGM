@@ -17,11 +17,12 @@ Class {
 }
 
 { #category : #'class initialization' }
-CardHandler class >> withDeck: aDeck andEffectHandler: anEffectHanlder [
+CardHandler class >> withDeck: aDeck withEffectHandler: anEffectHanlder andCoalitionHandler: aCoalitionHandler [
 
 	^ self new
 		  initalizeWithDeck: aDeck
-		  andAEffectHandler: anEffectHanlder
+		  withAnEffectHandler: anEffectHanlder
+		  andCoalitionHandler: aCoalitionHandler
 ]
 
 { #category : #generating }
@@ -46,13 +47,6 @@ CardHandler >> addToActiveCards: aCard [
 CardHandler >> applyLastEffectOn: aTarget [
 
 	effectHandler applyLastEffectOn: aTarget
-]
-
-{ #category : #comparing }
-CardHandler >> armyOf: aShip withEnemy: aEnemyShip [
-	
-	^ coalitionHandler armyOf: aShip withEnemy: aEnemyShip.
-
 ]
 
 { #category : #accessing }
@@ -81,15 +75,15 @@ CardHandler >> giveCardTo: aShipName [
 ]
 
 { #category : #initialization }
-CardHandler >> initalizeWithDeck: aDeck andAEffectHandler: anEffectHandler [
+CardHandler >> initalizeWithDeck: aDeck withAnEffectHandler: anEffectHandler andCoalitionHandler: aCoalitionHandler [
 
 	gameDeck := aDeck.
 	inPlayDeck := OrderedCollection new.
 	activeCards := OrderedCollection new.
 	lastCardPlayed := NullCard new.
 	effectHandler := anEffectHandler.
-	coalitionHandler := CoalitionHandler new.
-	amountOfStartingCards := 2.
+	coalitionHandler := aCoalitionHandler.
+	amountOfStartingCards := 2
 ]
 
 { #category : #accessing }
