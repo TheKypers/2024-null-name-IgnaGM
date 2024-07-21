@@ -10,12 +10,12 @@ Class {
 { #category : #event }
 NullCard >> activateWith: aCardHandler [
 
-	aCardHandler changeLastCardTo: self.
+	aCardHandler changeLastCardTo: self .
 	^ self
 ]
 
 { #category : #comparing }
-NullCard >> canPlayRightNow: theShipInTurn [
+NullCard >> canPlayAtAnyTime: lastCardPlayed [
 
-	^true
+	^ true
 ]

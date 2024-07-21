@@ -11,13 +11,13 @@ Class {
 ReversePolarityCard >> activateWith: aCardHandler [
 
 	aCardHandler reverseEffectPolarity: target.
-	aCardHandler addToActiveCards: self
+	aCardHandler addToActiveCards: self 
 ]
 
 { #category : #comparing }
-ReversePolarityCard >> canPlayRightNow: theShipInTurn [
+ReversePolarityCard >> canPlayAtAnyTime: lastCardPlayed [
 
-	^ theShipInTurn shipName = holder
+	^ false
 ]
 
 { #category : #event }

@@ -16,9 +16,9 @@ SpeedCard >> activateWith: aCardHandler [
 ]
 
 { #category : #comparing }
-SpeedCard >> canPlayRightNow: theShipInTurn [
+SpeedCard >> canPlayAtAnyTime: lastCardPlayed [
 
-	^ theShipInTurn shipName = holder
+	^ false
 ]
 
 { #category : #event }

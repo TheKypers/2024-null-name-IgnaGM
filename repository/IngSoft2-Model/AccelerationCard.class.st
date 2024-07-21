@@ -17,9 +17,9 @@ AccelerationCard >> activateWith: aCardHandler [
 ]
 
 { #category : #comparing }
-AccelerationCard >> canPlayRightNow: theShipInTurn [
+AccelerationCard >> canPlayAtAnyTime: lastCardPlayed [
 
-	^ theShipInTurn shipName = holder
+	^ false
 ]
 
 { #category : #event }

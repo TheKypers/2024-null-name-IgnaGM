@@ -11,11 +11,11 @@ Class {
 RepeatCard >> activateWith: aCardHandler [
 
 	aCardHandler applyLastEffectOn: target.
-	aCardHandler changeLastCardTo: self
+	aCardHandler changeLastCardTo: self 
 ]
 
 { #category : #comparing }
-RepeatCard >> canPlayRightNow: theShipInTurn [
+RepeatCard >> canPlayAtAnyTime: lastCardPlayed [
 
-	^true
+	^ true
 ]

@@ -11,11 +11,12 @@ Class {
 { #category : #event }
 ReversalCard >> activateWith: aCardHandler [
 
-	^ aCardHandler reverseCard: target
+	aCardHandler reverseCard: target.
+	aCardHandler addToActiveCards: self 
 ]
 
 { #category : #comparing }
-ReversalCard >> canPlayRightNow: theShipInTurn [
+ReversalCard >> canPlayAtAnyTime: lastCardPlayed [
 
 	^ true
 ]

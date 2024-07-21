@@ -11,13 +11,12 @@ Class {
 { #category : #event }
 RedoCard >> activateWith: aCardHandler [
 
-	aCardHandler activateCard: (aCardHandler lastCardPlayed class
-			 withHolder: holder
-			 andTarget: target)
+	aCardHandler activateCard:
+		(aCardHandler lastCardPlayed class withHolder: holder andTarget: target)
 ]
 
 { #category : #comparing }
-RedoCard >> canPlayRightNow: theShipInTurn [
+RedoCard >> canPlayAtAnyTime: lastCardPlayed [
 
-	^ true
+	^ lastCardPlayed canPlayAtAnyTime: lastCardPlayed
 ]
