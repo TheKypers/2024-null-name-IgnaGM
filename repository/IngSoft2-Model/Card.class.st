@@ -43,7 +43,7 @@ Card >> applyMovement [
 ]
 
 { #category : #comparing }
-Card >> canPlayRightNow: theShipInTurn [
+Card >> canPlayAtAnyTime: lastCardPlayed [
 
 	self subclassResponsibility
 ]
@@ -52,6 +52,12 @@ Card >> canPlayRightNow: theShipInTurn [
 Card >> deactivate: aCardHandler [
 
 	^ self
+]
+
+{ #category : #accessing }
+Card >> hasHolder: aShipName [
+
+	^ aShipName = holder
 ]
 
 { #category : #comparing }

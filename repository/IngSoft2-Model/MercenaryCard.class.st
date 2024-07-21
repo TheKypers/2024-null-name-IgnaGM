@@ -17,9 +17,9 @@ MercenaryCard >> activateWith: aCardHandler [
 ]
 
 { #category : #comparing }
-MercenaryCard >> canPlayRightNow: theShipInTurn [
+MercenaryCard >> canPlayAtAnyTime: lastCardPlayed [
 
-	^ theShipInTurn shipName = holder
+	^ false
 ]
 
 { #category : #event }

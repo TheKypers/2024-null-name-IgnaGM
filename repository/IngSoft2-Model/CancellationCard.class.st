@@ -17,7 +17,7 @@ CancellationCard >> activateWith: aCardHandler [
 ]
 
 { #category : #comparing }
-CancellationCard >> canPlayRightNow: theShipInTurn [
+CancellationCard >> canPlayAtAnyTime: lastCardPlayed [
 
 	^ true
 ]

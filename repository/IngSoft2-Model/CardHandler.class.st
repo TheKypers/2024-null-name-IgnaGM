@@ -49,6 +49,13 @@ CardHandler >> applyLastEffectOn: aTarget [
 	effectHandler applyLastEffectOn: aTarget
 ]
 
+{ #category : #modifying }
+CardHandler >> canPlayCard: aCardToPlay withTurnShip: theShipInCurrentTurn [
+
+	^ (aCardToPlay hasHolder: theShipInCurrentTurn shipName) or:
+		  (aCardToPlay canPlayAtAnyTime: lastCardPlayed)
+]
+
 { #category : #accessing }
 CardHandler >> changeLastCardTo: aCard [
 
